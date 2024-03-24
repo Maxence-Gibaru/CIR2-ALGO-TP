@@ -106,7 +106,6 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
     max_flow += ameliorationFlot;
 
     // Mettre à jour les capacités résiduelles du graphe résiduel
-    v = t;
     for (v = t; v != s; v = predDansCheminAmeliorant[v])
     {
       u = predDansCheminAmeliorant[v];

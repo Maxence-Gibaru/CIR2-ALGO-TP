@@ -4,8 +4,6 @@
 #include <algorithm>
 #include "functions.hpp"
 
-
-
 int main()
 {
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
@@ -67,12 +65,28 @@ int main()
   }
 
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
-  /*                             Partie 2 - Étape 3 : L’algorithme de Ford-Fulkerson                                  */
+  /*                             Partie 2 - Étape 3/4 : L’algorithme de Ford-Fulkerson                                */
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
   // En exécutant l'algorithme de Ford-Fulkerson sur notre graphe donné dans l'énoncé, on retrouve bien le flot maximal de 150.
   std::cout << fordFulkerson(grapheEtCapacites, s, t) << std::endl;
 
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                             Partie 3 - Étape 1 : Production libre et satisfaction de la demande                  */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+  std::vector<std::vector<int>> grapheUsine = {
+      {0, 25, 10, 8, 0},
+      {0, 0, 0, 0, 19},
+      {0, 0, 0, 0, 7},
+      {0, 0, 0, 0, 5},
+      {0, 0, 0, 0, 0},
+  };
+
+  s = 0; // Noeud de départ
+  t = 4; // Noeud d'arrivée
+
+  std::cout << fordFulkerson(grapheUsine, s, t) << std::endl;
 
   return 0;
 }
