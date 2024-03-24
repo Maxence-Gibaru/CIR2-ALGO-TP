@@ -73,6 +73,52 @@ bool parcoursLargeur(const graph &myGraph, int s, int t, vector<int> &predDansCh
   }
 }
 
+// Fonction Ford-Fulkerson
+int fordFulkerson(graph &capacites, int s, int t)
+{
+  int n = capacites.size(); // Nombre de sommets dans le graphe
+
+  // Créer le graphe résiduel initialisé avec les mêmes capacités que le graphe d'origine
+  graph grapheResiduel = capacites;
+
+  // Initialiser le flot maximal à 0
+  int max_flow = 0;
+
+  // Vecteur pour sauvegarder les prédécesseurs des sommets sur le chemin améliorant
+  vector<int> predDansCheminAmeliorant(n, -1);
+
+  // Boucle principale de l'algorithme
+  while (parcoursLargeur(grapheResiduel, s, t, predDansCheminAmeliorant))
+  {
+    // Trouver la capacité résiduelle minimale le long du chemin améliorant
+    int ameliorationFlot = INT_MAX;
+    int v = t; // Initialiser v au puits t
+
+    while (v != s)
+    {
+      int u = predDansCheminAmeliorant[v];
+      ameliorationFlot = min(ameliorationFlot, grapheResiduel[u][v]);
+      v = u; // Remonter le chemin améliorant
+    }
+
+    // Ajouter le flot minimum trouvé au flot maximal
+    max_flow += ameliorationFlot;
+
+    // Mettre à jour les capacités résiduelles du graphe résiduel
+    v = t;
+    while (v != s)
+    {
+      int u = predDansCheminAmeliorant[v];
+      grapheResiduel[u][v] -= ameliorationFlot; // Réduire la capacité sur l'arc direct
+      grapheResiduel[v][u] += ameliorationFlot; // Ajouter de la capacité sur l'arc inverse (rétrogradation)
+      v = u;                                    // Remonter le chemin améliorant
+    }
+  }
+
+  // Retourner le flot maximal
+  return max_flow;
+}
+
 int main()
 {
 
