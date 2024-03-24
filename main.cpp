@@ -74,6 +74,8 @@ bool parcoursLargeur(const graph &myGraph, int s, int t, vector<int> &predDansCh
 }
 
 // Fonction Ford-Fulkerson
+
+/*
 int fordFulkerson(graph &capacites, int s, int t)
 {
   int n = capacites.size(); // Nombre de sommets dans le graphe
@@ -118,6 +120,7 @@ int fordFulkerson(graph &capacites, int s, int t)
   // Retourner le flot maximal
   return max_flow;
 }
+*/
 
 int main()
 {
