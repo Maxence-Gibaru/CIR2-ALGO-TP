@@ -1,5 +1,8 @@
 # Sujet TD&P n°5 - Séances n°7 et 8
 
+- [] Rajouter des "test" pour chaque utilisation de fonctions pour détailler le fonctionnement 
+- [] 
+
 **Objectifs** :  Comprendre, développer et expérimenter l’algorithme de Ford-Fulkerson sur les différentes situations proposées. Ce TD&P noté devrait mettre en valeur la puissance d’une modélisation d’un problème réel en un problème de flots dans un graphe. Au travers d’une application concrète, on cherche à satisfaire les consommations localisées d’un produit manufacturé selon la capacité de production, de transport, et de stockage de plusieurs usines de fabrication.
 
 

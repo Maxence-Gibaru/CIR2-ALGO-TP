@@ -4,11 +4,25 @@
 #include <algorithm>
 #include "functions.hpp"
 
+
+
 int main()
 {
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                             Partie 1 : Trace de l’algorithme de Ford-Fulkerson                                   */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-  // Partie 2 étape 1
+  /*
+    voir README.md
+  */
+
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                             Partie 2 - Étape 1 : Représentation mémoire du graphe                                */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
   // Initialisation de la matrice d'adjacence grapheEtCapacites
+  // On fait le choix d'utiliser un type double vector afin d'utiliser les fonctions associées
+
   std::vector<std::vector<int>> grapheEtCapacites = {
       {0, 50, 70, 40, 0, 0, 0}, // Stuttgart (0)
       {0, 0, 0, 0, 60, 0, 0},   // Rotterdam (1)
@@ -19,8 +33,13 @@ int main()
       {0, 0, 0, 0, 0, 0, 0}     // Los Angeles (6)
   };
 
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                             Partie 2 - Étape 2 : Le parcours en largeur au service                               */
+  /*                                       de la recherche du chemin améliorant                                       */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
   int s = 0; // Noeud de départ
-  int t = 5; // Noeud d'arrivée
+  int t = 6; // Noeud d'arrivée
 
   // Vecteur pour sauvegarder les prédécesseurs des sommets sur le chemin améliorant
   // On initialise ce vecteur à la taille du graphe et on le remplie avec des -1
@@ -46,6 +65,14 @@ int main()
   {
     std::cout << "Il n'existe pas de chemin reliant " << s << " à " << t << std::endl;
   }
+
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                             Partie 2 - Étape 3 : L’algorithme de Ford-Fulkerson                                  */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+  // En exécutant l'algorithme de Ford-Fulkerson sur notre graphe donné dans l'énoncé, on retrouve bien le flot maximal de 150.
+  std::cout << fordFulkerson(grapheEtCapacites, s, t) << std::endl;
+
 
   return 0;
 }
