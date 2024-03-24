@@ -1,8 +1,7 @@
 [
 {
-  "directory": "/home/maxence/Desktop/workspace/github/junia/algo-TP/TP5/build",
-  "command": "/usr/bin/c++   -g -o CMakeFiles/TP5.dir/main.cpp.o -c /home/maxence/Desktop/workspace/github/junia/algo-TP/TP5/main.cpp",
-  "file": "/home/maxence/Desktop/workspace/github/junia/algo-TP/TP5/main.cpp",
-  "output": "CMakeFiles/TP5.dir/main.cpp.o"
+  "directory": "/home/maxence/Desktop/workspace/github/junia/algo-tp/CIR2-ALGO-TP/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/TP5.dir/main.cpp.o -c /home/maxence/Desktop/workspace/github/junia/algo-tp/CIR2-ALGO-TP/main.cpp",
+  "file": "/home/maxence/Desktop/workspace/github/junia/algo-tp/CIR2-ALGO-TP/main.cpp"
 }
 ]

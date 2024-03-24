@@ -1,4 +1,4 @@
-# Install script for directory: /home/maxence/Desktop/workspace/github/junia/algo-TP/TP5
+# Install script for directory: /home/maxence/Desktop/workspace/github/junia/algo-tp/CIR2-ALGO-TP
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/maxence/Desktop/workspace/github/junia/algo-TP/TP5/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/maxence/Desktop/workspace/github/junia/algo-tp/CIR2-ALGO-TP/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

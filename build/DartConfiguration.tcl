@@ -4,14 +4,14 @@
 
 
 # Configuration directories and files
-SourceDirectory: /home/maxence/Desktop/workspace/github/junia/algo-TP/TP5
-BuildDirectory: /home/maxence/Desktop/workspace/github/junia/algo-TP/TP5/build
+SourceDirectory: /home/maxence/Desktop/workspace/github/junia/algo-tp/CIR2-ALGO-TP
+BuildDirectory: /home/maxence/Desktop/workspace/github/junia/algo-tp/CIR2-ALGO-TP/build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: maxence-HP-ProBook-440-G8-Notebook-PC
+Site: olivier-Precision-7720
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Linux-c++
@@ -21,14 +21,13 @@ LabelsForSubprojects:
 
 # Submission information
 SubmitURL: http://
-SubmitInactivityTimeout: 
 
 # Dashboard start time
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/home/maxence/.local/lib/python3.10/site-packages/cmake/data/bin/cmake" "/home/maxence/Desktop/workspace/github/junia/algo-TP/TP5"
-MakeCommand: /home/maxence/.local/lib/python3.10/site-packages/cmake/data/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
+ConfigureCommand: "/usr/bin/cmake" "/home/maxence/Desktop/workspace/github/junia/algo-tp/CIR2-ALGO-TP"
+MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
 # version control
@@ -45,7 +44,7 @@ SVNOptions:
 SVNUpdateOptions: 
 
 # Git options
-GITCommand: 
+GITCommand: /usr/bin/git
 GITInitSubmodules: 
 GITUpdateOptions: 
 GITUpdateCustom: 
@@ -58,9 +57,9 @@ P4UpdateOptions:
 P4UpdateCustom: 
 
 # Generic update command
-UpdateCommand: 
+UpdateCommand: /usr/bin/git
 UpdateOptions: 
-UpdateType: 
+UpdateType: git
 
 # Compiler info
 Compiler: /usr/bin/c++
