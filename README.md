@@ -181,6 +181,26 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
 }
 ```
 
+### Etape 4 : Testez votre programme
+
+- C++. Joignez les différentes parties de code développées en Partie 2 de façon à
+retrouver un flot max de 150. Reportez la capture d’écran associée au résultat
+obtenu à l’exécution de votre code.
+
+En réunissant l'ensemble des fonctions développées dans la partie 2, on peut ainsi tester nos fonctions sur le graphe donné dans l'énoncé. 
+Voici le retour console que l'on obtient, on constate que la flot max trouvé 
+
+```bash
+
+0 -> 1 -> 4 -> 6 -> fin de chemin | flot max = 50
+0 -> 2 -> 4 -> 6 -> fin de chemin | flot max = 80
+0 -> 2 -> 5 -> 6 -> fin de chemin | flot max = 120
+0 -> 3 -> 5 -> 6 -> fin de chemin | flot max = 150
+
+Valeur flot max retournée : _150_
+
+```
+
 ## Problèmes réels
 
 Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
