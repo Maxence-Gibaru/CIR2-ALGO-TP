@@ -149,7 +149,7 @@ largeur adaptée pour renseigner de l’existence d’un chemin améliorant reli
 un noeud t. Nous allons maintenant développer l’algorithme de **Ford-Fulkerson** que l’on
 note fordFulkerson.
 
-- C++. Terminer l’implémentation de fordFulkerson. La dernière et principale partie de l’algorithme concerne la boucle Tant Que dont le pseudo-code est donné ci-dessous :
+- **C++**. Terminer l’implémentation de fordFulkerson. La dernière et principale partie de l’algorithme concerne la boucle Tant Que dont le pseudo-code est donné ci-dessous :
 
 ![algoFordFulkerson.png](/documents/images/algoFordFulkerson.png "algoFordFulkerson.png")
 
@@ -224,7 +224,7 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
 
 ### Etape 4 : Testez votre programme
 
-- C++. Joignez les différentes parties de code développées en Partie 2 de façon à
+- **C++**. Joignez les différentes parties de code développées en Partie 2 de façon à
 retrouver un flot max de 150. Reportez la capture d’écran associée au résultat
 obtenu à l’exécution de votre code.
 
