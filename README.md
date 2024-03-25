@@ -188,7 +188,7 @@ retrouver un flot max de 150. Reportez la capture d’écran associée au résul
 obtenu à l’exécution de votre code.
 
 En réunissant l'ensemble des fonctions développées dans la partie 2, on peut ainsi tester nos fonctions sur le graphe donné dans l'énoncé. 
-Voici le retour console que l'on obtient, on constate que la flot max trouvé 
+Voici le retour console que l'on obtient :
 
 ```bash
 
@@ -197,9 +197,10 @@ Voici le retour console que l'on obtient, on constate que la flot max trouvé
 0 -> 2 -> 5 -> 6 -> fin de chemin | flot max = 120
 0 -> 3 -> 5 -> 6 -> fin de chemin | flot max = 150
 
-Valeur flot max retournée : _150_
-
 ```
+Valeur flot max retournée : 150
+
+On retrouve bien le flot maximal attendu.
 
 ## Problèmes réels
 
