@@ -1,6 +1,6 @@
 # Sujet TD&P n°5 - Séances n°7 et 8
 
-![Junia Banner](/docs/images/junia_banner.jpeg "Junia Banner")
+![Junia Banner](/documents/images/junia_banner.jpeg "Junia Banner")
 
 
 - [ ] Rajouter des "test" pour chaque utilisation de fonctions pour détailler le fonctionnement
