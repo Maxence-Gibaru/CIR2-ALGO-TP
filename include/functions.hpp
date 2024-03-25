@@ -3,6 +3,10 @@
 #include <queue>
 #include <algorithm>
 
+
+// Définition du type de notre matrice d'adjacence
+using grapheType = std::vector<std::vector<int>>;
+
 // Fonction pour reconstruire le chemin améliorant à partir de predDansCheminAmeliorant
 std::vector<int> reconstruireChemin(int s, int t, const std::vector<int> &predDansCheminAmeliorant)
 {
@@ -21,7 +25,7 @@ std::vector<int> reconstruireChemin(int s, int t, const std::vector<int> &predDa
 }
 
 // Fonction du parcours en largeur
-bool parcoursLargeur(const std::vector<std::vector<int>> &myGraph, int s, int t, std::vector<int> &predDansCheminAmeliorant)
+bool parcoursLargeur(const grapheType &myGraph, int s, int t, std::vector<int> &predDansCheminAmeliorant)
 {
   int n = myGraph.size(); // Nombre de sommets dans le graphe
 
@@ -69,12 +73,12 @@ bool parcoursLargeur(const std::vector<std::vector<int>> &myGraph, int s, int t,
 }
 
 // Fonction Ford-Fulkerson
-int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
+int fordFulkerson(grapheType &myGraph, int s, int t)
 {
   int n = myGraph.size(); // Nombre de sommets dans le graphe
 
   // Créer le graphe résiduel initialisé avec les mêmes capacités que le graphe d'origine
-  std::vector<std::vector<int>> grapheResiduel = myGraph;
+  grapheType grapheResiduel = myGraph;
 
   // Deux indices de sommets utilisés tout le long de l'algorithme
   int u, v;

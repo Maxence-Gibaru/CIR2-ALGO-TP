@@ -23,7 +23,7 @@ int main()
   // Initialisation de la matrice d'adjacence grapheEtCapacites
   // On fait le choix d'utiliser un type double vector afin d'utiliser les fonctions associées
 
-  std::vector<std::vector<int>> grapheEtCapacites = {
+  grapheType grapheEtCapacites = {
       {0, 50, 70, 40, 0, 0, 0}, // Stuttgart (0)
       {0, 0, 0, 0, 60, 0, 0},   // Rotterdam (1)
       {0, 0, 0, 0, 40, 50, 0},  // Bordeaux (2)
@@ -48,10 +48,12 @@ int main()
   // Appel de la fonction parcoursLargeur
   bool existeChemin = parcoursLargeur(grapheEtCapacites, s, t, predDansCheminAmeliorant);
 
-  for (int i = 0; i < predDansCheminAmeliorant.size(); i++) 
+  /*
+  for (int i = 0; i < predDansCheminAmeliorant.size(); i++)
   {
     std::cout << i << ":" << predDansCheminAmeliorant[i] << std::endl;
   }
+  */
 
   if (existeChemin)
   {
@@ -61,7 +63,7 @@ int main()
     // Affichage du chemin améliorant
     if (DISPLAY)
     {
-      std::cout << "Chemin améliorant de " << s << " à " << t << " : ";
+      std::cout << "Premier Chemin améliorant de " << s << " à " << t << " : ";
     }
     for (int sommet : cheminAmeliorant)
     {
@@ -91,7 +93,7 @@ int main()
   /*                             Partie 3 - Étape 1 : Production libre et satisfaction de la demande                  */
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-  std::vector<std::vector<int>> grapheUsine = {
+  grapheType grapheUsine = {
       {0, INT32_MAX, INT32_MAX, INT32_MAX, 0},
       {0, 0, 0, 0, 19},
       {0, 0, 0, 0, 7},
