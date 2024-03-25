@@ -286,11 +286,15 @@ La valeur numérique **INT32_MAX** représente le plus grand nombre entier en 32
 
 ```C++
 
+  int demFrance = 19;
+  int demBelgique = 7;
+  int demSuisse = 5;
+
   grapheType grapheUsine = {
       {0, INT32_MAX, INT32_MAX, INT32_MAX, 0},
-      {0, 0, 0, 0, 19},
-      {0, 0, 0, 0, 7},
-      {0, 0, 0, 0, 5},
+      {0, 0, 0, 0, demFrance},
+      {0, 0, 0, 0, demBelgique},
+      {0, 0, 0, 0, demSuisse},
       {0, 0, 0, 0, 0},
   };
 
@@ -326,4 +330,18 @@ On peut ainsi modéliser les capacités de productions sur les arcs 1>2, 1>3, 1>
 
 - **C++**. Adaptez votre code avec les capacités de production données par le tableau
 précédent, exécutez le, et enfin reportez les captures d’écran du résultat obtenu.
+
+```C++
+
+  int capProdFrance = 25;
+  int capProdBelgique = 10;
+  int capProdSuisse = 8;
+
+  grapheUsine = {
+      {0, capProdFrance, capProdBelgique, capProdSuisse, 0}, // sommet 1
+      {0, 0, 0, 0, demFrance},                               // sommet 2
+      {0, 0, 0, 0, demBelgique},                             // sommet 3
+      {0, 0, 0, 0, demSuisse},                               // sommet 4
+      {0, 0, 0, 0, 0},                                       // sommet 5
+  };
 
