@@ -88,11 +88,17 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
   // Boucle principale de l'algorithme
   while (parcoursLargeur(grapheResiduel, s, t, predDansCheminAmeliorant))
   {
+    std::vector<int> cheminAmeliorant = reconstruireChemin(s, t, predDansCheminAmeliorant);
+    for (auto &sommet : cheminAmeliorant)
+    {
+      std::cout << sommet << std::endl;
+    }
+
     // Trouver la capacité résiduelle minimale le long du chemin améliorant
 
     // Initialisation du flot parcourant le chemin améliorant
     // Celui est initalisé à INT32_MAX, pour simuler une valeur "infinie"
-    // ainsi, on est sûr qu'il n'y aura pas de problème lorsqu'il sera mis à jour en comparant sa valeur avec la capacité du chemin 
+    // ainsi, on est sûr qu'il n'y aura pas de problème lorsqu'il sera mis à jour en comparant sa valeur avec la capacité du chemin
     int ameliorationFlot = INT32_MAX;
 
     // Parcours chaque noeud v du chemin améliorant de t à s (dans l'autre sens)
@@ -104,6 +110,9 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
 
     // Ajouter le flot minimum trouvé au flot maximal
     max_flow += ameliorationFlot;
+
+    std::cout << "fin de chemin |"
+              << " flot max = " << max_flow << std::endl;
 
     // Mettre à jour les capacités résiduelles du graphe résiduel
     for (v = t; v != s; v = predDansCheminAmeliorant[v])

@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <random>
 #include "functions.hpp"
+#include "config.hpp"
 
 int main()
 {
@@ -47,13 +48,21 @@ int main()
   // Appel de la fonction parcoursLargeur
   bool existeChemin = parcoursLargeur(grapheEtCapacites, s, t, predDansCheminAmeliorant);
 
+  for (int i = 0; i < predDansCheminAmeliorant.size(); i++) 
+  {
+    std::cout << i << ":" << predDansCheminAmeliorant[i] << std::endl;
+  }
+
   if (existeChemin)
   {
     // Reconstruction du chemin améliorant
     std::vector<int> cheminAmeliorant = reconstruireChemin(s, t, predDansCheminAmeliorant);
 
     // Affichage du chemin améliorant
-    std::cout << "Chemin améliorant de " << s << " à " << t << " : ";
+    if (DISPLAY)
+    {
+      std::cout << "Chemin améliorant de " << s << " à " << t << " : ";
+    }
     for (int sommet : cheminAmeliorant)
     {
       std::cout << sommet << " ";
@@ -62,7 +71,10 @@ int main()
   }
   else
   {
-    std::cout << "Il n'existe pas de chemin reliant " << s << " à " << t << std::endl;
+    if (DISPLAY)
+    {
+      std::cout << "Il n'existe pas de chemin reliant " << s << " à " << t << std::endl;
+    }
   }
 
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
@@ -70,7 +82,10 @@ int main()
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
   // En exécutant l'algorithme de Ford-Fulkerson sur notre graphe donné dans l'énoncé, on retrouve bien le flot maximal de 150.
-  std::cout << fordFulkerson(grapheEtCapacites, s, t) << std::endl;
+  if (DISPLAY)
+  {
+    std::cout << fordFulkerson(grapheEtCapacites, s, t) << std::endl;
+  }
 
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
   /*                             Partie 3 - Étape 1 : Production libre et satisfaction de la demande                  */
@@ -87,8 +102,6 @@ int main()
   s = 0; // Noeud de départ
   t = 4; // Noeud d'arrivée
 
-  std::cout << fordFulkerson(grapheUsine, s, t) << std::endl;
-
   // Partie 3 etape 2
 
   grapheUsine = {
@@ -99,8 +112,6 @@ int main()
       {0, 0, 0, 0, 0},
   };
 
-  std::cout << fordFulkerson(grapheUsine, s, t) << std::endl;
-
   // Partie 3 etape 3
 
   grapheUsine = {
@@ -110,8 +121,6 @@ int main()
       {0, 3, 3, 0, 5},
       {0, 0, 0, 0, 0},
   };
-
-  std::cout << fordFulkerson(grapheUsine, s, t) << std::endl;
 
   // Partie 3 etape 4
 
@@ -166,8 +175,6 @@ int main()
 
   // faire le graphe à la main pour vérifier le résultat
 
-  std::cout << fordFulkerson(grapheUsine, s, t) << std::endl;
-
   int mySeed = 6 + 5 + 7 + 6 + 7;
 
   // Moteur de nombres aléatoires et distribution
@@ -197,8 +204,6 @@ int main()
       {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
   };
 
-  std::cout << fordFulkerson(grapheUsine, s, t) << std::endl;
-
   for (int i = 0; i < 12; i++)
   {
     demFrance1 = dis(gen);
@@ -218,8 +223,6 @@ int main()
         {0, 0, capTransSF2, 0, capTransSB2, 0, 0, demSuisse2},                                                      // sommet Suisse t2
         {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
     };
-    int myFlot = fordFulkerson(grapheUsine, s, t);
-    std::cout << myFlot << std::endl;
   }
 
   return 0;
