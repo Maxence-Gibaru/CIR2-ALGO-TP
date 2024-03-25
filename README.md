@@ -246,3 +246,5 @@ On retrouve bien le flot maximal attendu.
 ## Problèmes réels
 
 Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
+
+![Graphe Usine 1](/documents/images/grapheUsine1.png "Graphe Usine")
