@@ -2,10 +2,6 @@
 
 ![Junia Banner](/documents/images/junia_banner.jpeg "Junia Banner")
 
-- [ ] Rajouter des "test" pour chaque utilisation de fonctions pour détailler le fonctionnement
-- [ ] Essayer d'avoir des affichages détaillés pour chaque chemin améliorant
-- [ ] Répondre aux questions et rajouter les écrans dans le rapport git
-
 **Objectifs** : Comprendre, développer et expérimenter l’algorithme de Ford-Fulkerson sur les différentes situations proposées. Ce TD&P noté devrait mettre en valeur la puissance d’une modélisation d’un problème réel en un problème de flots dans un graphe. Au travers d’une application concrète, on cherche à satisfaire les consommations localisées d’un produit manufacturé selon la capacité de production, de transport, et de stockage de plusieurs usines de fabrication.
 
 ## Table de matière :
@@ -14,14 +10,14 @@
 
 2. [Implémentation de l’algorithme de parcours en largeur puis de l’algorithme de Ford-Fulkerson qui se servira du parcours.](#partie-2)
 
-- [Étape 1 : Représentation mémoire du graphe](#Étape1)
-- [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.](#Étape2)
+  - [Étape 1 : Représentation mémoire du graphe](#Étape1)
+  - [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.](#Étape2)
 
 3. [Compréhension et modélisation de problèmes réels en graphes et recherche du flot maximum dans ces derniers. Les arcs des graphes supportent des capacités.](#problèmes-réels)
 
-Partie 4. A vous de jouer sur l’écriture d’un algorithme qui va calculer le coût minimal d’un flot dont la valeur (i.e., le nombre d’unités) a déjà été calculée. Les arcs des graphes supportent des capacités et des coûts.
+4. [A vous de jouer sur l’écriture d’un algorithme qui va calculer le coût minimal d’un flot dont la valeur (i.e., le nombre d’unités) a déjà été calculée. Les arcs des graphes supportent des capacités et des coûts.](#Partie4)
 
-Bonus.
+5. [Bonus.](#Bonus)
 
 ## Trace de l'agorithme de Ford-Fulkerson
 
@@ -33,7 +29,7 @@ Nous allons tout d’abord enregistrer un graphe en mémoire avec les techniques
 
 - **Question** : Quelle matrice est donnée en exemple dans le cours pour à la fois enregistrer l’existence d’un arc mais aussi leur poids (i.e., leur coût).
 
-La matrice donnée dans le cours est la matrice d’adjacence Madj :
+La matrice donnée dans le cours est la matrice d’adjacence **Madj** :
 
 ![Matrice Adjacence](/documents/images/matriceAdjacence.png "Matrice Adjacence")
 
@@ -69,9 +65,29 @@ Stuttgart == 0, Rotterdam == 1, Bordeaux == 2, Lisbonne == 3, New York == 4, New
 
 - **C++** : Utilisez soit un tableau 2D (type C), soit un double vector, soit un array afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
 
-
 On utilise ici un double vecteur d'entiers pour enregistrer la matrice d’adjacence grapheEtCapacites : 
 On obtient cette sortie qui correspond bien à la matrice.
+
+```C++
+
+// Définition du type de notre matrice d'adjacence
+using grapheType = std::vector<std::vector<int>>;
+
+
+  // Initialisation de la matrice d'adjacence grapheEtCapacites
+  // On fait le choix d'utiliser un type double vector afin d'utiliser les fonctions associées
+
+  grapheType grapheEtCapacites = {
+      {0, 50, 70, 40, 0, 0, 0}, // Stuttgart (0)
+      {0, 0, 0, 0, 60, 0, 0},   // Rotterdam (1)
+      {0, 0, 0, 0, 40, 50, 0},  // Bordeaux (2)
+      {0, 0, 0, 0, 0, 30, 0},   // Lisbon (3)
+      {0, 0, 0, 0, 0, 0, 80},   // New York (4)
+      {0, 0, 0, 0, 0, 0, 70},   // New Orleans (5)
+      {0, 0, 0, 0, 0, 0, 0}     // Los Angeles (6)
+  };
+
+```
 
 ![Matrice Console]("Matrice Console")
 
@@ -244,10 +260,10 @@ Voici le retour console que l'on obtient :
 
 ```bash
 
-0 -> 1 -> 4 -> 6 -> fin de chemin | flot max = 50
-0 -> 2 -> 4 -> 6 -> fin de chemin | flot max = 80
-0 -> 2 -> 5 -> 6 -> fin de chemin | flot max = 120
-0 -> 3 -> 5 -> 6 -> fin de chemin | flot max = 150
+>>> 0 -> 1 -> 4 -> 6 -> fin de chemin | flot max = 50
+>>> 0 -> 2 -> 4 -> 6 -> fin de chemin | flot max = 80
+>>> 0 -> 2 -> 5 -> 6 -> fin de chemin | flot max = 120
+>>> 0 -> 3 -> 5 -> 6 -> fin de chemin | flot max = 150
 
 ```
 Valeur flot max retournée : 150
@@ -259,3 +275,43 @@ On retrouve bien le flot maximal attendu.
 Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
 
 ![Graphe Usine 1](/documents/images/grapheUsine1.png "Graphe Usine")
+
+- **C++**. Représentez ce nouveau graphe en mémoire et liez-le au code écrit dans la
+partie précédente en y incluant la demande. A vous de réfléchir à quoi faire pour
+modéliser les arcs de production avec les différentes techniques vues en cours,
+puisqu’il n’y a pas, pour l’instant, de limitation sur la capacité de production.
+
+Pour modéliser les arcs de productions qui pour l'instant n'ont pas de capacités de production, on a décidé de leur assigné une valeur "infinie". 
+La valeur numérique **INT32_MAX** représente le plus grand nombre entier en 32 bits, ce qui suffira pour simuler une infinité :
+
+```C++
+
+  grapheType grapheUsine = {
+      {0, INT32_MAX, INT32_MAX, INT32_MAX, 0},
+      {0, 0, 0, 0, 19},
+      {0, 0, 0, 0, 7},
+      {0, 0, 0, 0, 5},
+      {0, 0, 0, 0, 0},
+  };
+
+  s = 0; // Noeud de départ
+  t = 4; // Noeud d'arrivée
+```
+
+- **C++**. Exécutez alors Ford-Fulkerson sur ce graphe, puis faites ressortir le flot max.
+Faites une capture d’écran du résultat de votre sortie terminal (IDE ou
+console) pour l’insérer dans votre rapport.
+
+
+- **Représentation de Graphe**. A partir de la situation précédente, mettez à jour le
+graphe10 donné plus haut en y ajoutant les capacités de production du tableau
+ci-dessous. Réfléchissez à l'endroit où interviennent ces capacités11. Reportez votre
+dessin dans votre rapport. Vous êtes libres du choix de l’outil pour le dessiner.
+
+On peut ainsi modéliser les capacités de productions sur les arcs 1>2, 1>3, 1>4 qui n'étaient pas définis avant :
+
+![Graphe Usine 2](/documents/images/grapheUsine2.png "Graphe Usine2")
+
+- **C++**. Adaptez votre code avec les capacités de production données par le tableau
+précédent, exécutez le, et enfin reportez les captures d’écran du résultat obtenu.
+
