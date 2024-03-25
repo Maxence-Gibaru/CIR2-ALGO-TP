@@ -49,7 +49,7 @@ Pour marquer le fait qu’un arc n’existe pas dans la matrice sauvegardant les
 
 Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherchait à acheminer un maximum d’unités de flot (ici par exemple un nombre maximum d'objets) entre la ville de Stuttgart et Los Angeles. Nous avons trouvé ensemble que le flot maximal attendu était de 150 :
 
-![Graphe Cours](/documents/images/grapheVilles.png "Graphe Villes)
+![Graphe Cours](/documents/images/grapheVilles.png "Graphe Villes")
 
 - **Question** : Représentez la matrice d’adjacence grapheEtCapacites pour cet exemple dans votre rapport. A vous d’identifier les indices pour reconnaître les villes associées (e.g., Stuttgart == 0 et Los Angeles == 6). On met de côté la matrice des coûts pour l’instant.
 
