@@ -298,8 +298,20 @@ La valeur numérique **INT32_MAX** représente le plus grand nombre entier en 32
   t = 4; // Noeud d'arrivée
 ```
 
-
-
 - **C++**. Exécutez alors Ford-Fulkerson sur ce graphe, puis faites ressortir le flot max.
 Faites une capture d’écran du résultat de votre sortie terminal (IDE ou
 console) pour l’insérer dans votre rapport.
+
+
+- **Représentation de Graphe**. A partir de la situation précédente, mettez à jour le
+graphe10 donné plus haut en y ajoutant les capacités de production du tableau
+ci-dessous. Réfléchissez à l'endroit où interviennent ces capacités11. Reportez votre
+dessin dans votre rapport. Vous êtes libres du choix de l’outil pour le dessiner.
+
+On peut ainsi modéliser les capacités de productions sur les arcs 1>2, 1>3, 1>4 qui n'étaient pas définis avant :
+
+![Graphe Usine 2](/documents/images/grapheUsine2.png "Graphe Usine2")
+
+- **C++**. Adaptez votre code avec les capacités de production données par le tableau
+précédent, exécutez le, et enfin reportez les captures d’écran du résultat obtenu.
+
