@@ -8,7 +8,7 @@
 
 **Objectifs** : Comprendre, développer et expérimenter l’algorithme de Ford-Fulkerson sur les différentes situations proposées. Ce TD&P noté devrait mettre en valeur la puissance d’une modélisation d’un problème réel en un problème de flots dans un graphe. Au travers d’une application concrète, on cherche à satisfaire les consommations localisées d’un produit manufacturé selon la capacité de production, de transport, et de stockage de plusieurs usines de fabrication.
 
-## Plan :
+## Table de matière :
 
 1. [Trace de l’algorithme de Ford-Fulkerson.](#trace-de-l'agorithme-de-Ford-Fulkerson)
 
@@ -23,9 +23,9 @@ Partie 4. A vous de jouer sur l’écriture d’un algorithme qui va calculer le
 
 Bonus.
 
-### Trace de l'agorithme de Ford-Fulkerson
+## Trace de l'agorithme de Ford-Fulkerson
 
-### Partie 2
+## Partie 2
 
 Etape 2
 
@@ -90,6 +90,18 @@ Une fois ces étapes finit le code nous renvoie le parcours améliorant de faço
 
 ```
 
-### Problèmes réels
+### Etape 3 : Algorithme de Ford-Fulkerson
+
+Nous avons donc développé **parcoursLargeur** qui est une implémentation du parcours en
+largeur adaptée pour renseigner de l’existence d’un chemin améliorant reliant un noeud s à
+un noeud t. Nous allons maintenant développer l’algorithme de **Ford-Fulkerson** que l’on
+note fordFulkerson.
+
+- C++. Terminer l’implémentation de fordFulkerson. La dernière et principale partie de l’algorithme concerne la boucle Tant Que dont le pseudo-code est donné ci-dessous :
+
+![algoFordFulkerson.png](/documents/images/algoFordFulkerson.png "algoFordFulkerson.png")
+
+
+## Problèmes réels
 
 Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
