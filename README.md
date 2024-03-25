@@ -302,6 +302,18 @@ La valeur numérique **INT32_MAX** représente le plus grand nombre entier en 32
 Faites une capture d’écran du résultat de votre sortie terminal (IDE ou
 console) pour l’insérer dans votre rapport.
 
+```C++
+
+  int flotMax = fordFulkerson(grapheUsine, s, t);
+
+  std::cout << "Le flot maximal pour ce premier graphe est : " << flotMax << std::endl;
+
+```
+On obtient ainsi en console le résultat suivant : 
+
+```bash 
+>>> Le flot maximal pour ce premier graphe est : 31
+```
 
 - **Représentation de Graphe**. A partir de la situation précédente, mettez à jour le
 graphe10 donné plus haut en y ajoutant les capacités de production du tableau
