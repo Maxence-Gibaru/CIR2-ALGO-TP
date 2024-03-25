@@ -116,6 +116,10 @@ note fordFulkerson.
 
 ```C++
 
+Nous avons donc développé la fonction **fordFulkerson** ci-dessous.
+Elle prend en paramètre un graphe de capacité, les indices des sommets sources et puits.
+Et elle renvoit le flot maximal de ce graphe :
+
 // Fonction Ford-Fulkerson
 int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
 {
