@@ -95,6 +95,8 @@ bool parcoursLargeur(const std::vector<std::vector<int>> &myGraph, int s, int t,
 
 ```
 
+**RAJOUTER STEP BY STEP PARCOURS LARGEUR**
+
 Une fois ces étapes finit le code nous renvoie le parcours améliorant de façon optimisée, en effet nous lui donnons un graphe en paramètres et il nous renvoie son parcours améliorant. Pour vous donner un exemple voici le résultat obtenu quand nous exécutons le programme réalisé avec le graphe donné en énoncé : 
 
 ```bash
@@ -180,6 +182,8 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
   return max_flow;
 }
 ```
+
+**RAJOUTER STEP BY STEP GRAPHE RESIDUEL**
 
 ### Etape 4 : Testez votre programme
 
