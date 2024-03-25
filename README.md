@@ -13,7 +13,7 @@
 
 ## Plan :
 
-1. [Partie 1. Trace de l’algorithme de Ford-Fulkerson.](#bouge)
+1. [Partie 1. Trace de l’algorithme de Ford-Fulkerson.](#Trace de l'agorithme de Ford-Fulkerson)
 
 2. [Partie 2. Implémentation de l’algorithme de parcours en largeur puis de l’algorithme de Ford-Fulkerson qui se servira du parcours.](#partie2)
   - [Étape 1 : Représentation mémoire du graphe][#Étape1]
@@ -25,7 +25,7 @@ Partie 4. A vous de jouer sur l’écriture d’un algorithme qui va calculer le
 Bonus.
 
 
-### bouge
+### Trace de l'agorithme de Ford-Fulkerson
 
 ### Partie 2
 
