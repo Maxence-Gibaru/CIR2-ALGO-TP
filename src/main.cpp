@@ -251,5 +251,64 @@ int main()
     };
   }
 
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                             Partie 4 - Étape 1 : Prise en compte des coûts                                       */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+  // Définition de tous les arcs pour la France
+  capProdFrance1 = dis(gen);
+  capProdFrance2 = dis(gen);
+  capStockFrance = dis(gen);
+  capTransFB1 = dis(gen);
+  capTransFB2 = dis(gen);
+  capTransFS1 = dis(gen);
+  capTransFS2 = dis(gen);
+  demFrance1 = dis(gen);
+  demFrance2 = dis(gen);
+
+  // Définition de tous les arcs pour la Belgique
+  capProdBelgique1 = dis(gen);
+  capProdBelgique2 = dis(gen);
+  capStockBelgique = dis(gen);
+  capTransBF1 = dis(gen);
+  capTransBF2 = dis(gen);
+  capTransBS1 = dis(gen);
+  capTransBS2 = dis(gen);
+  demBelgique1 = dis(gen);
+  demBelgique2 = dis(gen);
+
+  // Définition de tous les arcs pour la Suisse
+  capProdSuisse1 = dis(gen);
+  capProdSuisse2 = dis(gen);
+  capStockSuisse = dis(gen);
+  capTransSB1 = dis(gen);
+  capTransSB2 = dis(gen);
+  capTransSF1 = dis(gen);
+  capTransSF2 = dis(gen);
+  demSuisse1 = dis(gen);
+  demSuisse2 = dis(gen);
+
+  grapheType grapheUsineCout = {
+      {0, capProdFrance1, capProdFrance2, capProdBelgique1, capProdBelgique2, capProdSuisse1, capProdSuisse2, 0}, // sommet s
+      {0, 0, capStockFrance, capTransFB1, 0, capTransFS1, 0, 0},                                                  // sommet France t1
+      {0, 0, 0, 0, capTransFB2, 0, capTransFS2, 0},                                                               // sommet France t2
+      {0, capTransBF1, 0, 0, capStockBelgique, capTransBS1, 0, 0},                                                // sommet Belgique t1
+      {0, 0, capTransBF2, 0, 0, 0, capTransBS2, 0},                                                               // sommet Belgique t2
+      {0, capTransSF1, 0, capTransSB1, 0, 0, capStockSuisse, 0},                                                  // sommet Suisse t1
+      {0, 0, capTransSF2, 0, capTransSB2, 0, 0, 0},                                                               // sommet Suisse t2
+      {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
+  };
+
+  for (int i = 0; i < grapheUsineCout.size(); i++)
+  {
+    for (int j = 0; j < grapheUsineCout.size(); j++)
+    {
+      std::cout << grapheUsineCout[i][j] << " | ";
+    }
+    std::cout << std::endl;
+  }
+
+  fordFulkersonCost(grapheUsine, grapheUsineCout, s, t);
+
   return 0;
 }
