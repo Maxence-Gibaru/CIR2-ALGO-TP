@@ -82,6 +82,14 @@ bool parcoursLargeur(const std::vector<std::vector<int>> &myGraph, int s, int t,
 
 ```
 
+Une fois ces étapes finit le code nous renvoie le parcours améliorant de façon optimisée, en effet nous lui donnons un graphe en paramètres et il nous renvoie son parcours améliorant. Pour vous donner un exemple voici le résultat obtenu quand nous exécutons le programme réalisé avec le graphe donné en énoncé : 
+
+```bash
+
+>>> Chemin améliorant de 0 à 6 : 0 -> 1 -> 4 -> 6
+
+```
+
 ### Problèmes réels
 
 Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
