@@ -91,7 +91,7 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
     std::vector<int> cheminAmeliorant = reconstruireChemin(s, t, predDansCheminAmeliorant);
     for (auto &sommet : cheminAmeliorant)
     {
-      std::cout << sommet << std::endl;
+      std::cout << sommet << " -> ";
     }
 
     // Trouver la capacité résiduelle minimale le long du chemin améliorant
