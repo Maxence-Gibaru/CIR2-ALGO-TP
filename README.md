@@ -43,6 +43,7 @@ Nous avons donc développé la fonction **parcoursLargeur** ci-dessous :
 
 ```C++
 
+
 // Fonction du parcours en largeur
 bool parcoursLargeur(const std::vector<std::vector<int>> &myGraph, int s, int t, std::vector<int> &predDansCheminAmeliorant)
 {
@@ -80,6 +81,18 @@ bool parcoursLargeur(const std::vector<std::vector<int>> &myGraph, int s, int t,
     }
   }
 
+  // Vérifier si t a été visité (existence d'un chemin reliant s à t)
+  if (sommetVisite[t])
+  {
+    return true; // Un chemin reliant s à t existe
+  }
+  else
+  {
+    return false; // Aucun chemin reliant s à t n'existe
+  }
+}
+
+
 ```
 
 Une fois ces étapes finit le code nous renvoie le parcours améliorant de façon optimisée, en effet nous lui donnons un graphe en paramètres et il nous renvoie son parcours améliorant. Pour vous donner un exemple voici le résultat obtenu quand nous exécutons le programme réalisé avec le graphe donné en énoncé : 
@@ -101,6 +114,67 @@ note fordFulkerson.
 
 ![algoFordFulkerson.png](/documents/images/algoFordFulkerson.png "algoFordFulkerson.png")
 
+```C++
+
+// Fonction Ford-Fulkerson
+int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
+{
+  int n = myGraph.size(); // Nombre de sommets dans le graphe
+
+  // Créer le graphe résiduel initialisé avec les mêmes capacités que le graphe d'origine
+  std::vector<std::vector<int>> grapheResiduel = myGraph;
+
+  // Deux indices de sommets utilisés tout le long de l'algorithme
+  int u, v;
+
+  // Vecteur pour sauvegarder les prédécesseurs des sommets sur le chemin améliorant
+  std::vector<int> predDansCheminAmeliorant(n, -1);
+
+  // Initialiser le flot maximal à 0
+  int max_flow = 0;
+
+  // Boucle principale de l'algorithme
+  while (parcoursLargeur(grapheResiduel, s, t, predDansCheminAmeliorant))
+  {
+    std::vector<int> cheminAmeliorant = reconstruireChemin(s, t, predDansCheminAmeliorant);
+    for (auto &sommet : cheminAmeliorant)
+    {
+      std::cout << sommet << std::endl;
+    }
+
+    // Trouver la capacité résiduelle minimale le long du chemin améliorant
+
+    // Initialisation du flot parcourant le chemin améliorant
+    // Celui est initalisé à INT32_MAX, pour simuler une valeur "infinie"
+    // ainsi, on est sûr qu'il n'y aura pas de problème lorsqu'il sera mis à jour en comparant sa valeur avec la capacité du chemin
+    int ameliorationFlot = INT32_MAX;
+
+    // Parcours chaque noeud v du chemin améliorant de t à s (dans l'autre sens)
+    for (v = t; v != s; v = predDansCheminAmeliorant[v])
+    {
+      u = predDansCheminAmeliorant[v];
+      ameliorationFlot = std::min(ameliorationFlot, grapheResiduel[u][v]);
+    }
+
+    // Ajouter le flot minimum trouvé au flot maximal
+    max_flow += ameliorationFlot;
+
+    std::cout << "fin de chemin |"
+              << " flot max = " << max_flow << std::endl;
+
+    // Mettre à jour les capacités résiduelles du graphe résiduel
+    for (v = t; v != s; v = predDansCheminAmeliorant[v])
+    {
+      u = predDansCheminAmeliorant[v];
+      grapheResiduel[u][v] -= ameliorationFlot; // Réduire la capacité sur l'arc direct
+      grapheResiduel[v][u] += ameliorationFlot; // Ajouter de la capacité sur l'arc inverse (rétrogradation)                                // Remonter le chemin améliorant
+    }
+  }
+
+  // Retourner le flot maximal
+  return max_flow;
+}
+```
 
 ## Problèmes réels
 
