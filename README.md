@@ -14,8 +14,8 @@
 
 2. [Implémentation de l’algorithme de parcours en largeur puis de l’algorithme de Ford-Fulkerson qui se servira du parcours.](#partie-2)
 
-- [Étape 1 : Représentation mémoire du graphe][#Étape1]
-- [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.][#Étape2]
+- [Étape 1 : Représentation mémoire du graphe](#Étape1)
+- [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.](#Étape2)
 
 3. [Compréhension et modélisation de problèmes réels en graphes et recherche du flot maximum dans ces derniers. Les arcs des graphes supportent des capacités.](#problèmes-réels)
 
