@@ -27,11 +27,48 @@ Bonus.
 
 ## Partie 2
 
+**Etape 1**
+
+Nous allons tout d’abord enregistrer un graphe en mémoire avec les techniques vues en cours.
+
+- **Question** : Quelle matrice est donnée en exemple dans le cours pour à la fois enregistrer l’existence d’un arc mais aussi leur poids (i.e., leur coût).
+
+La matrice donnée dans le cours est la matrice d’adjacence Madj :
+
+![Matrice Adjacence](/documents/images/matriceAdjacence.png "Matrice Adjacence")
+
+- **Question** : Expliquez l’intérêt des coûts infinis dans une telle matrice.
+  
+L’intérêt des coûts infinis dans une telle matrice est de représenter l’absence de liaison entre 2 sommets. Dans les algorithmes de recherche de chemin comme Dijkstra ou Bellman-Ford, les coûts infinis sont utilisés pour indiquer des chemins non parcourables ou des chemins qui n'existent pas.
+
+Nous allons utiliser 2 matrices du même type pour sauvegarder les informations d’un graphe. L’une enregistrera les capacités, l’autre les coûts de chaque arc. La matrice des coûts ne sera utilisée qu’en partie 4 : nous travaillerons d’abord sur la matrice des capacités puisque le gros du travail consistera à trouver un flot max dans les 3 premières parties. Nous évaluerons le flot en termes de coûts dans la dernière partie, mais d’abord nous cherchons à faire passer un certain nombre d'unités de flots en fonction des capacités.
+
+- **Question** : Qu’allez-vous utiliser pour marquer le fait qu’un arc n’existe pas dans la matrice sauvegardant les capacités ?
+  
+Pour marquer le fait qu’un arc n’existe pas dans la matrice sauvegardant les capacités, on peut simplement mettre des 0 cela montre que la capacité entre 2 sommets est nulle.
+
+Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherchait à acheminer un maximum d’unités de flot (ici par exemple un nombre maximum d'objets) entre la ville de Stuttgart et Los Angeles. Nous avons trouvé ensemble que le flot maximal attendu était de 150 :
+
+![Graphe Cours](/documents/images/grapheVille.png "Graphe Villes)
+
+- **Question** : Représentez la matrice d’adjacence grapheEtCapacites pour cet exemple dans votre rapport. A vous d’identifier les indices pour reconnaître les villes associées (e.g., Stuttgart == 0 et Los Angeles == 6). On met de côté la matrice des coûts pour l’instant.
+
+  Pour reconnaître les villes on leur donne des indices :
+Stuttgart == 0, Rotterdam == 1, Bordeaux == 2, Lisbonne == 3, New York == 4, New Orleans == 5, Los Angeles == 6.
+
+- **C++** : Utilisez soit un tableau 2D (type C), soit un double <vector>, soit un <array> afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
+
+
+On utilise ici un double vecteur d'entiers pour enregistrer la matrice d’adjacence grapheEtCapacites : 
+On obtient cette sortie qui correspond bien à la matrice.
+
+![Matrice Console]("Matrice Console")
+
 Etape 2
 
 Nous avons déjà vu en cours que l'efficacité de l’algorithme de Ford-Fulkerson dépendait principalement de la recherche du chemin améliorant. Un tel algorithme peut être basé sur un algorithme de parcours, et c’est, comme souvent, le parcours en largeur qui sera implémenté ici.
 
-- C++. Nous allons maintenant nous attaquer à la boucle principale “Tant Que” de
+- **C++**. Nous allons maintenant nous attaquer à la boucle principale “Tant Que” de
   l’algorithme. Développez la, en vous basant sur le pseudo code suivant et en vous
   assurant ensuite de pouvoir récupérer le nouveau predDansCheminAmeliorant :
 
