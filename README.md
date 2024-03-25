@@ -35,7 +35,7 @@ Nous avons déjà vu en cours que l'efficacité de l’algorithme de Ford-Fulker
   l’algorithme. Développez la, en vous basant sur le pseudo code suivant et en vous
   assurant ensuite de pouvoir récupérer le nouveau predDansCheminAmeliorant :
 
-![Algo Parcours Longueur](/docs/images/junia_banner.jpeg "Algo Longueur")
+![Algo Parcours Longueur](/docs/images/algoParcoursLongueur.png "Algo Longueur")
 
 ```C++
 
