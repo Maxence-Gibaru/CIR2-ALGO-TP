@@ -259,3 +259,31 @@ On retrouve bien le flot maximal attendu.
 Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
 
 ![Graphe Usine 1](/documents/images/grapheUsine1.png "Graphe Usine")
+
+- **C++**. Représentez ce nouveau graphe en mémoire et liez-le au code écrit dans la
+partie précédente en y incluant la demande. A vous de réfléchir à quoi faire pour
+modéliser les arcs de production avec les différentes techniques vues en cours,
+puisqu’il n’y a pas, pour l’instant, de limitation sur la capacité de production.
+
+Pour modéliser les arcs de productions qui pour l'instant n'ont pas de capacités de production, on a décidé de leur assigné une valeur "infinie". 
+La valeur numérique **INT32_MAX** représente le plus grand nombre entier en 32 bits, ce qui suffira pour simuler une infinité :
+
+```C++
+
+  std::vector<std::vector<int>> grapheUsine = {
+      {0, INT32_MAX, INT32_MAX, INT32_MAX, 0},
+      {0, 0, 0, 0, 19},
+      {0, 0, 0, 0, 7},
+      {0, 0, 0, 0, 5},
+      {0, 0, 0, 0, 0},
+  };
+
+  s = 0; // Noeud de départ
+  t = 4; // Noeud d'arrivée
+```
+
+
+
+- **C++**. Exécutez alors Ford-Fulkerson sur ce graphe, puis faites ressortir le flot max.
+Faites une capture d’écran du résultat de votre sortie terminal (IDE ou
+console) pour l’insérer dans votre rapport.
