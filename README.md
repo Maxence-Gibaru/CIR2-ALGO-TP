@@ -13,12 +13,12 @@
 
 ## Plan :
 
-1. [Partie 1. Trace de l’algorithme de Ford-Fulkerson.](#trace-de-l'agorithme-de-Ford-Fulkerson)
+1. [Trace de l’algorithme de Ford-Fulkerson.](#trace-de-l'agorithme-de-Ford-Fulkerson)
 
-2. [Partie 2. Implémentation de l’algorithme de parcours en largeur puis de l’algorithme de Ford-Fulkerson qui se servira du parcours.](#partie2)
+2. [Implémentation de l’algorithme de parcours en largeur puis de l’algorithme de Ford-Fulkerson qui se servira du parcours.](#partie-2)
   - [Étape 1 : Représentation mémoire du graphe][#Étape1]
   - [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.][#Étape2]
-4. [Partie 3. Compréhension et modélisation de problèmes réels en graphes et recherche du flot maximum dans ces derniers. Les arcs des graphes supportent des capacités.]
+3. [Compréhension et modélisation de problèmes réels en graphes et recherche du flot maximum dans ces derniers. Les arcs des graphes supportent des capacités.](#problèmes-réels)
 
 Partie 4. A vous de jouer sur l’écriture d’un algorithme qui va calculer le coût minimal d’un flot dont la valeur (i.e., le nombre d’unités) a déjà été calculée. Les arcs des graphes supportent des capacités et des coûts.
 
@@ -28,5 +28,31 @@ Bonus.
 ### Trace de l'agorithme de Ford-Fulkerson
 
 ### Partie 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Problèmes réels
 
 Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
