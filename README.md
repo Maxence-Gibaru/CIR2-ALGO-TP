@@ -67,7 +67,7 @@ Stuttgart == 0, Rotterdam == 1, Bordeaux == 2, Lisbonne == 3, New York == 4, New
 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 
-- **C++** : Utilisez soit un tableau 2D (type C), soit un double <vector>, soit un <array> afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
+- **C++** : Utilisez soit un tableau 2D (type C), soit un double vector, soit un array afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
 
 
 On utilise ici un double vecteur d'entiers pour enregistrer la matrice d’adjacence grapheEtCapacites : 
