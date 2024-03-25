@@ -1,11 +1,9 @@
 # Sujet TD&P n°5 - Séances n°7 et 8
 
-- [] Rajouter des "test" pour chaque utilisation de fonctions pour détailler le fonctionnement 
-- [] 
+- [] Rajouter des "test" pour chaque utilisation de fonctions pour détailler le fonctionnement
+- []
 
-**Objectifs** :  Comprendre, développer et expérimenter l’algorithme de Ford-Fulkerson sur les différentes situations proposées. Ce TD&P noté devrait mettre en valeur la puissance d’une modélisation d’un problème réel en un problème de flots dans un graphe. Au travers d’une application concrète, on cherche à satisfaire les consommations localisées d’un produit manufacturé selon la capacité de production, de transport, et de stockage de plusieurs usines de fabrication.
-
-
+**Objectifs** : Comprendre, développer et expérimenter l’algorithme de Ford-Fulkerson sur les différentes situations proposées. Ce TD&P noté devrait mettre en valeur la puissance d’une modélisation d’un problème réel en un problème de flots dans un graphe. Au travers d’une application concrète, on cherche à satisfaire les consommations localisées d’un produit manufacturé selon la capacité de production, de transport, et de stockage de plusieurs usines de fabrication.
 
 **Plan** :
 
@@ -20,3 +18,5 @@ Partie 3. Compréhension et modélisation de problèmes réels en graphes et rec
 Partie 4. A vous de jouer sur l’écriture d’un algorithme qui va calculer le coût minimal d’un flot dont la valeur (i.e., le nombre d’unités) a déjà été calculée. Les arcs des graphes supportent des capacités et des coûts.
 
 Bonus.
+
+Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
