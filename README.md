@@ -56,6 +56,17 @@ Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherc
   Pour reconnaître les villes on leur donne des indices :
 Stuttgart == 0, Rotterdam == 1, Bordeaux == 2, Lisbonne == 3, New York == 4, New Orleans == 5, Los Angeles == 6.
 
+|   | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|---|
+| 0 | 0 | 50| 70| 40| 0 | 0 | 0 |
+| 1 | 0 | 0 | 0 | 0 | 60| 0 | 0 |
+| 2 | 0 | 0 | 0 | 0 | 40| 50| 0 |
+| 3 | 0 | 0 | 0 | 0 | 0 | 30| 0 |
+| 4 | 0 | 0 | 0 | 0 | 0 | 0 | 80|
+| 5 | 0 | 0 | 0 | 0 | 0 | 0 | 70|
+| 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+
 - **C++** : Utilisez soit un tableau 2D (type C), soit un double <vector>, soit un <array> afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
 
 
