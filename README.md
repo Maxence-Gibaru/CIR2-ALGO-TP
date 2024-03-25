@@ -14,8 +14,8 @@
 
 2. [Implémentation de l’algorithme de parcours en largeur puis de l’algorithme de Ford-Fulkerson qui se servira du parcours.](#partie-2)
 
-- [Étape 1 : Représentation mémoire du graphe][#Étape1]
-- [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.][#Étape2]
+- [Étape 1 : Représentation mémoire du graphe](#Étape1)
+- [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.](#Étape2)
 
 3. [Compréhension et modélisation de problèmes réels en graphes et recherche du flot maximum dans ces derniers. Les arcs des graphes supportent des capacités.](#problèmes-réels)
 
@@ -49,14 +49,25 @@ Pour marquer le fait qu’un arc n’existe pas dans la matrice sauvegardant les
 
 Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherchait à acheminer un maximum d’unités de flot (ici par exemple un nombre maximum d'objets) entre la ville de Stuttgart et Los Angeles. Nous avons trouvé ensemble que le flot maximal attendu était de 150 :
 
-![Graphe Cours](/documents/images/grapheVille.png "Graphe Villes)
+![Graphe Cours](/documents/images/grapheVilles.png "Graphe Villes")
 
-- **Question** : Représentez la matrice d’adjacence grapheEtCapacites pour cet exemple dans votre rapport. A vous d’identifier les indices pour reconnaître les villes associées (e.g., Stuttgart == 0 et Los Angeles == 6). On met de côté la matrice des coûts pour l’instant.
+- **Question** : Représentez la matrice d’adjacence **grapheEtCapacites** pour cet exemple dans votre rapport. A vous d’identifier les indices pour reconnaître les villes associées (e.g., Stuttgart == 0 et Los Angeles == 6). On met de côté la matrice des coûts pour l’instant.
 
   Pour reconnaître les villes on leur donne des indices :
 Stuttgart == 0, Rotterdam == 1, Bordeaux == 2, Lisbonne == 3, New York == 4, New Orleans == 5, Los Angeles == 6.
 
-- **C++** : Utilisez soit un tableau 2D (type C), soit un double <vector>, soit un <array> afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
+|   | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|---|
+| 0 | 0 | 50| 70| 40| 0 | 0 | 0 |
+| 1 | 0 | 0 | 0 | 0 | 60| 0 | 0 |
+| 2 | 0 | 0 | 0 | 0 | 40| 50| 0 |
+| 3 | 0 | 0 | 0 | 0 | 0 | 30| 0 |
+| 4 | 0 | 0 | 0 | 0 | 0 | 0 | 80|
+| 5 | 0 | 0 | 0 | 0 | 0 | 0 | 70|
+| 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+
+- **C++** : Utilisez soit un tableau 2D (type C), soit un double vector, soit un array afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
 
 
 On utilise ici un double vecteur d'entiers pour enregistrer la matrice d’adjacence grapheEtCapacites : 
@@ -149,7 +160,7 @@ largeur adaptée pour renseigner de l’existence d’un chemin améliorant reli
 un noeud t. Nous allons maintenant développer l’algorithme de **Ford-Fulkerson** que l’on
 note fordFulkerson.
 
-- C++. Terminer l’implémentation de fordFulkerson. La dernière et principale partie de l’algorithme concerne la boucle Tant Que dont le pseudo-code est donné ci-dessous :
+- **C++**. Terminer l’implémentation de fordFulkerson. La dernière et principale partie de l’algorithme concerne la boucle Tant Que dont le pseudo-code est donné ci-dessous :
 
 ![algoFordFulkerson.png](/documents/images/algoFordFulkerson.png "algoFordFulkerson.png")
 
@@ -224,7 +235,7 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
 
 ### Etape 4 : Testez votre programme
 
-- C++. Joignez les différentes parties de code développées en Partie 2 de façon à
+- **C++**. Joignez les différentes parties de code développées en Partie 2 de façon à
 retrouver un flot max de 150. Reportez la capture d’écran associée au résultat
 obtenu à l’exécution de votre code.
 
