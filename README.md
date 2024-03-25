@@ -260,10 +260,10 @@ Voici le retour console que l'on obtient :
 
 ```bash
 
-0 -> 1 -> 4 -> 6 -> fin de chemin | flot max = 50
-0 -> 2 -> 4 -> 6 -> fin de chemin | flot max = 80
-0 -> 2 -> 5 -> 6 -> fin de chemin | flot max = 120
-0 -> 3 -> 5 -> 6 -> fin de chemin | flot max = 150
+>>> 0 -> 1 -> 4 -> 6 -> fin de chemin | flot max = 50
+>>> 0 -> 2 -> 4 -> 6 -> fin de chemin | flot max = 80
+>>> 0 -> 2 -> 5 -> 6 -> fin de chemin | flot max = 120
+>>> 0 -> 3 -> 5 -> 6 -> fin de chemin | flot max = 150
 
 ```
 Valeur flot max retournée : 150
