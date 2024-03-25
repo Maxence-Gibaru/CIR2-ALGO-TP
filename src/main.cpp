@@ -93,36 +93,60 @@ int main()
   /*                             Partie 3 - Étape 1 : Production libre et satisfaction de la demande                  */
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
+  int demFrance = 19;
+  int demBelgique = 7;
+  int demSuisse = 5;
+
   grapheType grapheUsine = {
-      {0, INT32_MAX, INT32_MAX, INT32_MAX, 0},
-      {0, 0, 0, 0, 19},
-      {0, 0, 0, 0, 7},
-      {0, 0, 0, 0, 5},
-      {0, 0, 0, 0, 0},
+      {0, INT32_MAX, INT32_MAX, INT32_MAX, 0}, // sommet 1
+      {0, 0, 0, 0, demFrance},                 // sommet 2
+      {0, 0, 0, 0, demBelgique},               // sommet 3
+      {0, 0, 0, 0, demSuisse},                 // sommet 4
+      {0, 0, 0, 0, 0},                         // sommet 5
   };
 
   s = 0; // Noeud de départ
   t = 4; // Noeud d'arrivée
 
+  int flotMax = fordFulkerson(grapheUsine, s, t);
+
+  std::cout << "Le flot maximal pour ce premier graphe est : " << flotMax << std::endl;
+
   // Partie 3 etape 2
 
+  int capProdFrance = 25;
+  int capProdBelgique = 10;
+  int capProdSuisse = 8;
+
   grapheUsine = {
-      {0, 25, 10, 8, 0},
-      {0, 0, 0, 0, 19},
-      {0, 0, 0, 0, 7},
-      {0, 0, 0, 0, 5},
-      {0, 0, 0, 0, 0},
+      {0, capProdFrance, capProdBelgique, capProdSuisse, 0}, // sommet 1
+      {0, 0, 0, 0, demFrance},                               // sommet 2
+      {0, 0, 0, 0, demBelgique},                             // sommet 3
+      {0, 0, 0, 0, demSuisse},                               // sommet 4
+      {0, 0, 0, 0, 0},                                       // sommet 5
   };
 
   // Partie 3 etape 3
 
+  demFrance = 30;
+  int capTransFB = 8;
+  int capTransBF = 8;
+  int capTransBS = 3;
+  int capTransSB = 3;
+  int capTransFS = 12;
+  int capTransSF = 12;
+
   grapheUsine = {
       {0, 25, 10, 8, 0},
-      {0, 0, 8, 12, 30},
-      {0, 8, 0, 3, 7},
-      {0, 3, 3, 0, 5},
+      {0, 0, capTransFB, capTransFS, demFrance},
+      {0, capTransBF, 0, capTransBS, demBelgique},
+      {0, capTransSF, capTransSB, 0, demSuisse},
       {0, 0, 0, 0, 0},
   };
+
+  flotMax = fordFulkerson(grapheUsine, s, t);
+
+  std::cout << "Le flot maximal pour ce troisième graphe est : " << flotMax << std::endl;
 
   // Partie 3 etape 4
 
