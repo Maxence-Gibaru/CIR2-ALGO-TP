@@ -37,7 +37,7 @@ entre les sommets s et t. Votre rapport doit contenir chaque étape de la trace 
   pour sortir de l’algorithme.
 
 
-
+![Graphe Partie 1](/documents/images/graphePartie1.png "Partie 1")
 
 
 
