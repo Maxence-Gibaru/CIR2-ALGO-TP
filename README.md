@@ -39,6 +39,10 @@ entre les sommets s et t. Votre rapport doit contenir chaque étape de la trace 
 
 ![Graphe Partie 1](/documents/images/graphePartie1.png "Partie 1")
 
+Etant donné qu’il n’est plus possible de trouver de chemin améliorant à cause des arcs saturés, on peut voir que le flot maximal est de **19**.
+
+La somme des flots sortants du la source **s : 9 + 10**
+La somme des flots entrants dans le puits **t : 10 + 9**
 
 
 
