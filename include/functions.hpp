@@ -2,6 +2,7 @@
 #include <vector>
 #include <queue>
 #include <algorithm>
+#include "config.hpp"
 
 // Définition du type de notre matrice d'adjacence
 using grapheType = std::vector<std::vector<int>>;
@@ -94,7 +95,10 @@ int fordFulkerson(grapheType &myGraph, int s, int t)
     std::vector<int> cheminAmeliorant = reconstruireChemin(s, t, predDansCheminAmeliorant);
     for (auto &sommet : cheminAmeliorant)
     {
-      std::cout << sommet << " -> ";
+      if (DISPLAY)
+      {
+        std::cout << sommet << " -> ";
+      }
     }
 
     // Trouver la capacité résiduelle minimale le long du chemin améliorant
@@ -114,8 +118,11 @@ int fordFulkerson(grapheType &myGraph, int s, int t)
     // Ajouter le flot minimum trouvé au flot maximal
     max_flow += ameliorationFlot;
 
-    std::cout << "fin de chemin |"
-              << " flot max = " << max_flow << std::endl;
+    if (DISPLAY)
+    {
+      std::cout << "fin de chemin |"
+                << " flot max = " << max_flow << std::endl;
+    }
 
     // Mettre à jour les capacités résiduelles du graphe résiduel
     for (v = t; v != s; v = predDansCheminAmeliorant[v])
@@ -155,7 +162,10 @@ int fordFulkersonCost(grapheType &myGraph, grapheType &myCostGraph, int s, int t
     std::vector<int> cheminAmeliorant = reconstruireChemin(s, t, predDansCheminAmeliorant);
     for (auto &sommet : cheminAmeliorant)
     {
-      std::cout << sommet << " -> ";
+      if (DISPLAY)
+      {
+        std::cout << sommet << " -> ";
+      }
     }
 
     // Trouver la capacité résiduelle minimale le long du chemin améliorant
@@ -171,15 +181,19 @@ int fordFulkersonCost(grapheType &myGraph, grapheType &myCostGraph, int s, int t
       u = predDansCheminAmeliorant[v];
       ameliorationFlot = std::min(ameliorationFlot, grapheResiduel[u][v]);
       totalCost += myCostGraph[u][v] * ameliorationFlot;
-      std::cout << "cost : " << totalCost << std::endl;
+      if (DISPLAY)
+      {
+        std::cout << "cost : " << totalCost << std::endl;
+      }
     }
 
     // Ajouter le flot minimum trouvé au flot maximal
     max_flow += ameliorationFlot;
-
-    std::cout << "fin de chemin |"
-              << " flot max = " << max_flow << std::endl;
-
+    if (DISPLAY)
+    {
+      std::cout << "fin de chemin |"
+                << " flot max = " << max_flow << std::endl;
+    }
     // Mettre à jour les capacités résiduelles du graphe résiduel
     for (v = t; v != s; v = predDansCheminAmeliorant[v])
     {

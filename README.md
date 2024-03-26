@@ -26,7 +26,22 @@
 
 5. [Bonus.](#Bonus)
 
-## Trace de l'agorithme de Ford-Fulkerson
+## Partie 1 
+
+- **Trace**. On va tout d’abord s’exercer “à la main” sur un exemple simple. Déroulez
+l’algorithme de Ford-Fulkerson sur l’exemple ci-dessous afin de calculer le flot max
+entre les sommets s et t. Votre rapport doit contenir chaque étape de la trace :
+  - une étape correspond ici à une itération de la boucle “Tant Que” où il faut
+  faire apparaître le graphe résiduel ET le graphe des flots et en mettant en
+  évidence chaque nouveau chemin améliorant et enfin l’absence de celui-ci
+  pour sortir de l’algorithme.
+
+
+
+
+
+
+
 
 ## Partie 2
 
@@ -351,4 +366,25 @@ précédent, exécutez le, et enfin reportez les captures d’écran du résulta
       {0, 0, 0, 0, demSuisse},                               // sommet 4
       {0, 0, 0, 0, 0},                                       // sommet 5
   };
+
+
+
+
+
+
+  **Partie 4**
+
+
+
+**Algo**. Partie libre. Imaginez, puis écrire l’algorithme cherchant : soit le planning le
+moins coûteux, soit un des moins coûteux pour un flot max déjà calculé ; ceci
+correspond respectivement à écrire soit une méthode exacte, soit une méthode
+approchée18. Que vous fassiez le premier ou le second choix, prenez le temps de
+bien expliquer votre algorithme dans votre rapport.
+
+Dans un premier temps, nous allons expérimenter des tests sur des graphes avec moins de sommets que le dernier que l'on vient de faire ci-dessus. 
+
+
+** Pour n répétitions 
+    chercher un chemin avec un coût moindre 
 

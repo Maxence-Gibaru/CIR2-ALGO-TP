@@ -48,32 +48,32 @@ int main()
   // Appel de la fonction parcoursLargeur
   bool existeChemin = parcoursLargeur(grapheEtCapacites, s, t, predDansCheminAmeliorant);
 
-  /*
-  for (int i = 0; i < predDansCheminAmeliorant.size(); i++)
+  if (DISPLAY)
   {
-    std::cout << i << ":" << predDansCheminAmeliorant[i] << std::endl;
-  }
-  */
-
-  if (existeChemin)
-  {
-    // Reconstruction du chemin améliorant
-    std::vector<int> cheminAmeliorant = reconstruireChemin(s, t, predDansCheminAmeliorant);
-
-    // Affichage du chemin améliorant
-    if (DISPLAY)
+    for (int i = 0; i < predDansCheminAmeliorant.size(); i++)
     {
+      std::cout << i << ":" << predDansCheminAmeliorant[i] << std::endl;
+    }
+  }
+
+  if (DISPLAY)
+  {
+    if (existeChemin)
+    {
+      // Reconstruction du chemin améliorant
+      std::vector<int> cheminAmeliorant = reconstruireChemin(s, t, predDansCheminAmeliorant);
+
+      // Affichage du chemin améliorant
+
       std::cout << "Premier Chemin améliorant de " << s << " à " << t << " : ";
+
+      for (int sommet : cheminAmeliorant)
+      {
+        std::cout << sommet << " ";
+      }
+      std::cout << std::endl;
     }
-    for (int sommet : cheminAmeliorant)
-    {
-      std::cout << sommet << " ";
-    }
-    std::cout << std::endl;
-  }
-  else
-  {
-    if (DISPLAY)
+    else
     {
       std::cout << "Il n'existe pas de chemin reliant " << s << " à " << t << std::endl;
     }
@@ -110,9 +110,14 @@ int main()
 
   int flotMax = fordFulkerson(grapheUsine, s, t);
 
-  std::cout << "Le flot maximal pour ce premier graphe est : " << flotMax << std::endl;
+  if (DISPLAY)
+  {
+    std::cout << "Le flot maximal pour ce premier graphe est : " << flotMax << std::endl;
+  }
 
-  // Partie 3 etape 2
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                             Partie 3 - Étape 2 : Production limitée et satisfaction de la demande                */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
   int capProdFrance = 25;
   int capProdBelgique = 10;
@@ -126,7 +131,10 @@ int main()
       {0, 0, 0, 0, 0},                                       // sommet 5
   };
 
-  // Partie 3 etape 3
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                             Partie 3 - Étape 3 : Production et transfert limités                                 */
+  /*                                          et satisfaction de la demande                                           */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
   demFrance = 30;
   int capTransFB = 8;
@@ -146,9 +154,15 @@ int main()
 
   flotMax = fordFulkerson(grapheUsine, s, t);
 
-  std::cout << "Le flot maximal pour ce troisième graphe est : " << flotMax << std::endl;
+  if (DISPLAY)
+  {
+    std::cout << "Le flot maximal pour ce troisième graphe est : " << flotMax << std::endl;
+  }
 
-  // Partie 3 etape 4
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                             Partie 3 - Étape 4 :  Production, transfert et stockage limités et                   */
+  /*                                              satisfaction de la demande                                          */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
   // On rajoute des sommets
 
@@ -201,6 +215,10 @@ int main()
 
   // faire le graphe à la main pour vérifier le résultat
 
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+  /*                                    Partie 3 - Étape 5 :  Demande aléatoire                                       */
+  /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
   int mySeed = 6 + 5 + 7 + 6 + 7;
 
   // Moteur de nombres aléatoires et distribution
@@ -252,7 +270,7 @@ int main()
   }
 
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
-  /*                             Partie 4 - Étape 1 : Prise en compte des coûts                                       */
+  /*                                       Partie 4 : Prise en compte des coûts                                       */
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
   // Définition de tous les arcs pour la France
@@ -299,16 +317,46 @@ int main()
       {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
   };
 
-  for (int i = 0; i < grapheUsineCout.size(); i++)
+  if (DISPLAY)
   {
-    for (int j = 0; j < grapheUsineCout.size(); j++)
+    for (int i = 0; i < grapheUsineCout.size(); i++)
     {
-      std::cout << grapheUsineCout[i][j] << " | ";
+      for (int j = 0; j < grapheUsineCout.size(); j++)
+      {
+
+        std::cout << grapheUsineCout[i][j] << " | ";
+      }
+      std::cout << std::endl;
     }
-    std::cout << std::endl;
   }
 
-  fordFulkersonCost(grapheUsine, grapheUsineCout, s, t);
+  /*fordFulkersonCost(grapheUsine, grapheUsineCout, s, t);*/
+
+  grapheType grapheUsineCost = {
+      {0, 12, 4, 7, 0},
+      {0, 0, 6, 14, 0},
+      {0, 18, 0, 21, 0},
+      {0, 25, 9, 0, 0},
+      {0, 0, 0, 0, 0},
+  };
+
+  demFrance = 15;
+  capTransFB = 8;
+  capTransBF = 8;
+  capTransBS = 3;
+  capTransSB = 3;
+  capTransFS = 12;
+  capTransSF = 12;
+
+  grapheUsine = {
+      {0, 64, 40, 28, 0},
+      {0, 0, capTransFB, capTransFS, demFrance},
+      {0, capTransBF, 0, capTransBS, demBelgique},
+      {0, capTransSF, capTransSB, 0, demSuisse},
+      {0, 0, 0, 0, 0},
+  };
+
+  fordFulkersonCost(grapheUsine, grapheUsineCost, 0, 4);
 
   return 0;
 }

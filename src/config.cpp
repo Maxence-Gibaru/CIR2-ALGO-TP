@@ -1,3 +1,3 @@
 #include "config.hpp"
 
-bool DISPLAY = true;
+bool DISPLAY = false;
