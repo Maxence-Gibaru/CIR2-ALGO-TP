@@ -120,9 +120,24 @@ On obtient cette sortie qui correspond bien à la matrice.
       {0, 0, 0, 0, 0, 0, 0}     // Los Angeles (6)
   };
 
+// On affiche le graphe en console à l'aide de notre fonction displayMadj
+displayMadj(
+
 ```
 
-![Matrice Console]("Matrice Console")
+```bash
+
+>>> Matrice d'ajdacence du graphe : 
+
+0 | 50 | 70 | 40 |  0 |  0 |  0 | 
+0 |  0 |  0 |  0 | 60 |  0 |  0 | 
+0 |  0 |  0 |  0 | 40 | 50 |  0 | 
+0 |  0 |  0 |  0 |  0 | 30 |  0 | 
+0 |  0 |  0 |  0 |  0 |  0 | 80 | 
+0 |  0 |  0 |  0 |  0 |  0 | 70 | 
+0 |  0 |  0 |  0 |  0 |  0 |  0 | 
+
+```
 
 Etape 2
 
