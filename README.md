@@ -76,7 +76,13 @@ Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherc
 - **Question** : Représentez la matrice d’adjacence **grapheEtCapacites** pour cet exemple dans votre rapport. A vous d’identifier les indices pour reconnaître les villes associées (e.g., Stuttgart == 0 et Los Angeles == 6). On met de côté la matrice des coûts pour l’instant.
 
   Pour reconnaître les villes on leur donne des indices :
-Stuttgart == 0, Rotterdam == 1, Bordeaux == 2, Lisbonne == 3, New York == 4, New Orleans == 5, Los Angeles == 6.
+- Stuttgart == 0,
+- Rotterdam == 1,
+- Bordeaux == 2,
+- Lisbonne == 3,
+- New York == 4,
+- New Orleans == 5,
+- Los Angeles == 6.
 
 |   | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|---|
