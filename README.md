@@ -652,6 +652,54 @@ façon à faire apparaître, pour chacune des 12 itérations :
 Relevez enfin le pourcentage de la demande satisfaite sur l’année. Reportez des
 copies-écrans de ces résultats dans votre rapport.
 
+```C++
+
+  for (int i = 1; i <= 12; i++)
+  {
+    demFrance1 = 15 + dis(gen);
+    demFrance2 = 15 + dis(gen);
+    demBelgique1 = 15 + dis(gen);
+    demBelgique2 = 15 + dis(gen);
+    demSuisse1 = 15 + dis(gen);
+    demSuisse2 = 15 + dis(gen);
+
+    grapheUsine = {
+        {0, capProdFrance1, capProdFrance2, capProdBelgique1, capProdBelgique2, capProdSuisse1, capProdSuisse2, 0}, // sommet s
+        {0, 0, capStockFrance, capTransFB1, 0, capTransFS1, 0, demFrance1},                                         // sommet France t1
+        {0, 0, 0, 0, capTransFB2, 0, capTransFS2, demFrance2},                                                      // sommet France t2
+        {0, capTransBF1, 0, 0, capStockBelgique, capTransBS1, 0, demBelgique1},                                     // sommet Belgique t1
+        {0, 0, capTransBF2, 0, 0, 0, capTransBS2, demBelgique2},                                                    // sommet Belgique t2
+        {0, capTransSF1, 0, capTransSB1, 0, 0, capStockSuisse, demSuisse1},                                         // sommet Suisse t1
+        {0, 0, capTransSF2, 0, capTransSB2, 0, 0, demSuisse2},                                                      // sommet Suisse t2
+        {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
+    };
+
+    
+
+    flotMax = fordFulkerson(grapheUsine, s, t);
+
+    if (DISPLAY)
+    {
+      std::cout << "Mois n°" << i << " Le flot maximal pour ce cinquième graphe est : " << flotMax << std::endl;
+    }
+  }
+```
+```bash
+Mois n°1 Le flot maximal pour ce cinquième graphe est : 68
+Mois n°2 Le flot maximal pour ce cinquième graphe est : 68
+Mois n°3 Le flot maximal pour ce cinquième graphe est : 66
+Mois n°4 Le flot maximal pour ce cinquième graphe est : 67
+Mois n°5 Le flot maximal pour ce cinquième graphe est : 59
+Mois n°6 Le flot maximal pour ce cinquième graphe est : 68
+Mois n°7 Le flot maximal pour ce cinquième graphe est : 68
+Mois n°8 Le flot maximal pour ce cinquième graphe est : 68
+Mois n°9 Le flot maximal pour ce cinquième graphe est : 68
+Mois n°10 Le flot maximal pour ce cinquième graphe est : 68
+Mois n°11 Le flot maximal pour ce cinquième graphe est : 68
+Mois n°12 Le flot maximal pour ce cinquième graphe est : 61
+```
+
+Sur une année, le flot max ne change pas énormément. Le plus gros écart par rapport au flot maximal initial trouvé est de 9. 
 
 
 
