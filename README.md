@@ -37,8 +37,12 @@ entre les sommets s et t. Votre rapport doit contenir chaque étape de la trace 
   pour sortir de l’algorithme.
 
 
+![Graphe Partie 1](/documents/images/graphePartie1.png "Partie 1")
 
+Etant donné qu’il n’est plus possible de trouver de chemin améliorant à cause des arcs saturés, on peut voir que le flot maximal est de **19**.
 
+La somme des flots sortants du la source **s : 9 + 10**
+La somme des flots entrants dans le puits **t : 10 + 9**
 
 
 
@@ -51,7 +55,7 @@ Nous allons tout d’abord enregistrer un graphe en mémoire avec les techniques
 
 - **Question** : Quelle matrice est donnée en exemple dans le cours pour à la fois enregistrer l’existence d’un arc mais aussi leur poids (i.e., leur coût).
 
-La matrice donnée dans le cours est la matrice d’adjacence **Madj** :
+La matrice donnée dans le cours qui permet de représenter un graphe est la matrice d’adjacence notée **Madj** :
 
 ![Matrice Adjacence](/documents/images/matriceAdjacence.png "Matrice Adjacence")
 
@@ -72,7 +76,13 @@ Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherc
 - **Question** : Représentez la matrice d’adjacence **grapheEtCapacites** pour cet exemple dans votre rapport. A vous d’identifier les indices pour reconnaître les villes associées (e.g., Stuttgart == 0 et Los Angeles == 6). On met de côté la matrice des coûts pour l’instant.
 
   Pour reconnaître les villes on leur donne des indices :
-Stuttgart == 0, Rotterdam == 1, Bordeaux == 2, Lisbonne == 3, New York == 4, New Orleans == 5, Los Angeles == 6.
+- Stuttgart == 0,
+- Rotterdam == 1,
+- Bordeaux == 2,
+- Lisbonne == 3,
+- New York == 4,
+- New Orleans == 5,
+- Los Angeles == 6.
 
 |   | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|---|
@@ -84,6 +94,7 @@ Stuttgart == 0, Rotterdam == 1, Bordeaux == 2, Lisbonne == 3, New York == 4, New
 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 70|
 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
+Cette matrice se lit des lignes vers les colonnes, ainsi l'arc de 1 vers 4 (Rotterdam -> New York) nous donne 60 de capacité.
 
 - **C++** : Utilisez soit un tableau 2D (type C), soit un double vector, soit un array afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
 
@@ -92,8 +103,8 @@ On obtient cette sortie qui correspond bien à la matrice.
 
 ```C++
 
-// Définition du type de notre matrice d'adjacence
-using grapheType = std::vector<std::vector<int>>;
+  // Définition du type de notre matrice d'adjacence
+  using grapheType = std::vector<std::vector<int>>;
 
 
   // Initialisation de la matrice d'adjacence grapheEtCapacites
@@ -109,9 +120,24 @@ using grapheType = std::vector<std::vector<int>>;
       {0, 0, 0, 0, 0, 0, 0}     // Los Angeles (6)
   };
 
+// On affiche le graphe en console à l'aide de notre fonction displayMadj
+displayMadj(
+
 ```
 
-![Matrice Console]("Matrice Console")
+```bash
+
+>>> Matrice d'ajdacence du graphe : 
+
+0 | 50 | 70 | 40 |  0 |  0 |  0 | 
+0 |  0 |  0 |  0 | 60 |  0 |  0 | 
+0 |  0 |  0 |  0 | 40 | 50 |  0 | 
+0 |  0 |  0 |  0 |  0 | 30 |  0 | 
+0 |  0 |  0 |  0 |  0 |  0 | 80 | 
+0 |  0 |  0 |  0 |  0 |  0 | 70 | 
+0 |  0 |  0 |  0 |  0 |  0 |  0 | 
+
+```
 
 Etape 2
 
@@ -181,8 +207,6 @@ bool parcoursLargeur(const std::vector<std::vector<int>> &myGraph, int s, int t,
 
 ```
 
-**RAJOUTER STEP BY STEP PARCOURS LARGEUR**
-
 Une fois ces étapes finit le code nous renvoie le parcours améliorant de façon optimisée, en effet nous lui donnons un graphe en paramètres et il nous renvoie son parcours améliorant. Pour vous donner un exemple voici le résultat obtenu quand nous exécutons le programme réalisé avec le graphe donné en énoncé : 
 
 ```bash
@@ -193,7 +217,7 @@ Une fois ces étapes finit le code nous renvoie le parcours améliorant de faço
 
 ### Etape 3 : Algorithme de Ford-Fulkerson
 
-Nous avons donc développé **parcoursLargeur** qui est une implémentation du parcours en
+Nous avons donc développé la fonction**parcoursLargeur** qui est une implémentation du parcours en
 largeur adaptée pour renseigner de l’existence d’un chemin améliorant reliant un noeud s à
 un noeud t. Nous allons maintenant développer l’algorithme de **Ford-Fulkerson** que l’on
 note fordFulkerson.
@@ -268,8 +292,7 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
   return max_flow;
 }
 ```
-
-**RAJOUTER STEP BY STEP GRAPHE RESIDUEL**
+Cette fonction renvoit le flot maximal du graphe donné en entrée. 
 
 ### Etape 4 : Testez votre programme
 
@@ -292,9 +315,42 @@ Valeur flot max retournée : 150
 
 On retrouve bien le flot maximal attendu.
 
+On peut également essayer la fonction fordFulkerson sur le graphe qu'on a itéré à la main dans la partie 1 : 
+
+```C++
+
+  grapheType graphePartie1 = {
+      {0, 10, 10, 0, 0, 0}, // sommet s
+      {0, 0, 2, 4, 8, 0},   // sommet a
+      {0, 0, 0, 0, 9, 0},   // sommet b
+      {0, 0, 0, 0, 0, 10},  // sommet c
+      {0, 0, 0, 6, 0, 10},  // sommet d
+      {0, 0, 0, 0, 0, 0},   // sommet t
+  };
+
+  s = 0;
+  t = 5;
+
+  if (!DISPLAY)
+  {
+    std::cout << fordFulkerson(graphePartie1, s, t) << std::endl;
+  }
+```
+```bash
+
+>>> Flot maximal du graphe : 19
+```
+Cela retourne bien le même résultat trouvé à la main ultérieurement. 
+
 ## Problèmes réels
 
 Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
+
+Imaginez avoir la responsabilité d’une société disposant de 3 usines produisant des tonnes
+de tablettes de chocolat9, chacune dans un pays différent. Pour chaque pays i, il y a une
+consommation (demande) associée Dem(i). Dans l’exemple ci-dessous, on demande à
+l’usine Belge de fournir 7 unités, la française 20 unités et la Suisse 5 unités. On considère
+ici que chaque unité de flot correspond à une unité de chocolat.
 
 ![Graphe Usine 1](/documents/images/grapheUsine1.png "Graphe Usine")
 
@@ -342,8 +398,8 @@ On obtient ainsi en console le résultat suivant :
 ```
 
 - **Représentation de Graphe**. A partir de la situation précédente, mettez à jour le
-graphe10 donné plus haut en y ajoutant les capacités de production du tableau
-ci-dessous. Réfléchissez à l'endroit où interviennent ces capacités11. Reportez votre
+graphe donné plus haut en y ajoutant les capacités de production du tableau
+ci-dessous. Réfléchissez à l'endroit où interviennent ces capacités. Reportez votre
 dessin dans votre rapport. Vous êtes libres du choix de l’outil pour le dessiner.
 
 On peut ainsi modéliser les capacités de productions sur les arcs 1>2, 1>3, 1>4 qui n'étaient pas définis avant :
@@ -367,12 +423,182 @@ précédent, exécutez le, et enfin reportez les captures d’écran du résulta
       {0, 0, 0, 0, 0},                                       // sommet 5
   };
 
+  int flotMax = fordFulkerson(grapheUsine, s, t);
+
+  if (DISPLAY)
+  {
+    std::cout << "Le flot maximal pour ce deuxième graphe est : " << flotMax << std::endl;
+  }
+```
+```bash
+>>> Le flot maximal pour ce deuxième graphe est : 31
+```
+
+On constate qu'en rajoutant les capacités de productions, on obtient le même flot maximal qu'à la question précédente. 
+
+**Etape 3**
+
+On ajoute maintenant la possibilité de transférer les unités de chocolat entre les usines une
+fois celles-ci produites. Les transferts d’unité de chocolat peuvent être considérés comme
+instantanés et suivant le processus de production.
+Les camions ou autres moyens de transport sont en nombre limité, on considère une
+capacité sur ces transferts que l’on notera CapTrans. Ainsi, si i et j sont deux une usine,
+la capacité de transfert de l’usine i vers l’usine j est notée CapTrans(i>j).
+
+![Graphe Usine 3](/documents/images/grapheUsine3.png "Graphe Usine Partie 3")
+
+- **C++**. Adaptez votre code précédent à ces capacités de transfert et cette nouvelle
+demande, exécutez le, et enfin reportez les captures d’écran du résultat obtenu dans
+votre rendu.
+
+```C++
+
+  demFrance = 30;
+  int capTransFB = 8;
+  int capTransBF = 8;
+  int capTransBS = 3;
+  int capTransSB = 3;
+  int capTransFS = 12;
+  int capTransSF = 12;
+
+  grapheUsine = {
+      {0, 25, 10, 8, 0},
+      {0, 0, capTransFB, capTransFS, demFrance},
+      {0, capTransBF, 0, capTransBS, demBelgique},
+      {0, capTransSF, capTransSB, 0, demSuisse},
+      {0, 0, 0, 0, 0},
+  };
+
+  flotMax = fordFulkerson(grapheUsine, s, t);
+
+  if (DISPLAY)
+  {
+    std::cout << "Le flot maximal pour ce troisième graphe est : " << flotMax << std::endl;
+  }
+```
+```bash
+
+>>> Le flot maximal pour ce troisième graphe est : 42
+```
+
+En rajoutant les capacités de transfert, on obtient un flot maximal plus important.
+
+**Etape 4**
+
+Nous allons maintenant considérer plusieurs périodes de temps afin de pouvoir stocker les
+produits d’une période à l’autre et ceci dans chaque pays. Cela permet de nouvelles
+possibilités pour satisfaire la demande.
+Reprenons le même exemple avec nos trois usines mais cette fois avec la possibilité de
+stocker des d’unités de chocolat produites. Nous allons voir comment représenter ces
+périodes. Pour cela, “clonons” chaque sommet “usine” de façon à avoir un sommet par pays
+et par période de temps. Si on considère deux périodes de temps t1 et t2, nous avons les
+sommets suivants :
+- (2.1) et (2.2) : respectivement l’usine en France pour les périodes 1 et 2 ;
+- (3.1) et (3.2) : respectivement l’usine en Belgique pour les périodes 1 et 2 ;
+- (4.1) et (4.2) : respectivement l’usine en Suisse pour les périodes 1 et 2.
+
+On considère le stockage comme un processus démarrant après la production et les
+transferts de la période donnée. Ceci devrait se faire de manière transparente si vous
+respectez les caractéristiques des graphes présentés ici.
+
+Si i est une usine, t1 et t2 deux périodes de stockage consécutives, le stockage d’unité
+de chocolat de la période t1 à la période t2 de l’usine i consomme une unité de capacité
+notée CapStock(i.t1).
+
+- **Représentation de Graphe**. En vous aidant de la figure ci-dessous qui ne
+représente que les capacités de production et de stockage d’un seul pays, dessinez
+le graphe “global” pour toutes les capacités (production, stockage et transfert), ainsi
+que la demande. Vous pouvez vous limiter à deux pays que vous aurez choisis.
+
+![Graphe Usine 4](/documents/images/grapheUsine4.png "Graphe Usine Partie 4")) 
+
+- **C++**. Adaptez votre code pour le problème avec toutes les capacités (production,
+transfert et stockage) appliquées aux 3 pays en reprenant les valeurs des tableaux
+ci-dessus. Exécutez ensuite votre programme et reportez les captures d’écran du
+résultat obtenu.
+
+```C++
+
+  // On rajoute des sommets
+
+  s = 0; // Noeud de départ
+  t = 7; // Noeud d'arrivée
+
+  // Définition de tous les arcs pour la France
+  int capProdFrance1 = 25;
+  int capProdFrance2 = 15;
+  int capStockFrance = 15;
+  int capTransFB1 = 10;
+  int capTransFB2 = 5;
+  int capTransFS1 = 10;
+  int capTransFS2 = 5;
+  int demFrance1 = 14;
+  int demFrance2 = 19;
+
+  // Définition de tous les arcs pour la Belgique
+  int capProdBelgique1 = 10;
+  int capProdBelgique2 = 5;
+  int capStockBelgique = 8;
+  int capTransBF1 = 4;
+  int capTransBF2 = 8;
+  int capTransBS1 = 10;
+  int capTransBS2 = 5;
+  int demBelgique1 = 3;
+  int demBelgique2 = 10;
+
+  // Définition de tous les arcs pour la Suisse
+  int capProdSuisse1 = 5;
+  int capProdSuisse2 = 8;
+  int capStockSuisse = 7;
+  int capTransSB1 = 10;
+  int capTransSB2 = 5;
+  int capTransSF1 = 4;
+  int capTransSF2 = 7;
+  int demSuisse1 = 7;
+  int demSuisse2 = 5;
+
+  grapheUsine = {
+      {0, capProdFrance1, capProdFrance2, capProdBelgique1, capProdBelgique2, capProdSuisse1, capProdSuisse2, 0}, // sommet s
+      {0, 0, capStockFrance, capTransFB1, 0, capTransFS1, 0, demFrance1},                                         // sommet France t1
+      {0, 0, 0, 0, capTransFB2, 0, capTransFS2, demFrance2},                                                      // sommet France t2
+      {0, capTransBF1, 0, 0, capStockBelgique, capTransBS1, 0, demBelgique1},                                     // sommet Belgique t1
+      {0, 0, capTransBF2, 0, 0, 0, capTransBS2, demBelgique2},                                                    // sommet Belgique t2
+      {0, capTransSF1, 0, capTransSB1, 0, 0, capStockSuisse, demSuisse1},                                         // sommet Suisse t1
+      {0, 0, capTransSF2, 0, capTransSB2, 0, 0, demSuisse2},                                                      // sommet Suisse t2
+      {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
+  };
+
+  flotMax = fordFulkerson(grapheUsine, s, t);
+
+  if (!DISPLAY)
+  {
+    std::cout << "Le flot maximal pour ce quatrième graphe est : " << flotMax << std::endl;
+  }
+```
+```bash
+>>> Le flot maximal pour ce quatrième graphe est : 58
+```
+
+**Etape 5**
+
+Pour anticiper (ou pas) une période troublée, vous essayez d’évaluer la robustesse de votre
+système de production devant une demande variable.
+
+- **C++**. En vous basant sur les travaux de l’étape précédente, adaptez votre code de
+façon à considérer des demandes générées aléatoirement14 mais dont les valeurs,
+inférieures ou supérieures, restent assez proches des valeurs initiales (à vous de
+choisir une borne Min et une borne Max pour chacune des demandes et indiquez-les
+dans votre rapport). Relevez le résultat obtenu accompagné de la demande générée
+à travers une copie écran du résultat de la console.
 
 
 
 
 
-  **Partie 4**
+
+**Etape 5**
+
+**Partie 4**
 
 
 
