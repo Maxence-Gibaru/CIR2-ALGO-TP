@@ -510,7 +510,7 @@ représente que les capacités de production et de stockage d’un seul pays, de
 le graphe “global” pour toutes les capacités (production, stockage et transfert), ainsi
 que la demande. Vous pouvez vous limiter à deux pays que vous aurez choisis.
 
-![Graphe Usine 4](/documents/images/grapheUsine4.png "Graphe Usine Partie 4")) 
+![Graphe Usine 4](/documents/images/grapheUsine4.png "Graphe Usine Partie 4")
 
 - **C++**. Adaptez votre code pour le problème avec toutes les capacités (production,
 transfert et stockage) appliquées aux 3 pays en reprenant les valeurs des tableaux
@@ -591,16 +591,47 @@ choisir une borne Min et une borne Max pour chacune des demandes et indiquez-les
 dans votre rapport). Relevez le résultat obtenu accompagné de la demande générée
 à travers une copie écran du résultat de la console.
 
+```C++
+INSERT
+
+```
+
+En considérant des périodes de 15 jours (T1 et T2 formant un mois), on peut simuler ce que
+le système de production est capable de supporter sur une année. Ici chaque mois est
+indépendant.
+
+- **C++**. Modifiez votre code de façon à itérer 12 fois sur la recherche du flot maximum
+et où la demande aura changé autant de fois et selon les règles de la question
+précédente15. Formater l’affichage du résultat (flot max) obtenu sur le terminal de
+façon à faire apparaître, pour chacune des 12 itérations :
+- la demande aléatoire générée (pour chaque arc),
+- le pourcentage de la demande satisfaite pour chaque mois,
+Relevez enfin le pourcentage de la demande satisfaite sur l’année. Reportez des
+copies-écrans de ces résultats dans votre rapport.
+
+```C++
+
+insert
+```
 
 
-
-
-
-**Etape 5**
 
 **Partie 4**
 
+- **C++**. Génération des coûts. On va tout d’abord chercher à générer l’ensemble des
+coûts 𝑐(𝑖, 𝑗), 𝑖, 𝑗 ∈ 𝑋, pour tous les arcs qui ne sont pas des arcs de demande16 :
+- les coûts de stockage,
+- les coûts de transfert,
+- les coûts de production.
+Générez des coûts différents pour chaque type d’arc (production, transfert et
+stockage) et cela pour chacun des pays en vous aidant de la génération de nombres
+pseudo-aléatoires. Ainsi, servez-vous d’une matrice de la même taille que
+grapheEtCapacites, mais cette fois pour sauvegarder les coûts générés. Relever le
+graphe des coûts que vous obtenez dans votre rapport.
 
+```C++
+INSERT
+```
 
 **Algo**. Partie libre. Imaginez, puis écrire l’algorithme cherchant : soit le planning le
 moins coûteux, soit un des moins coûteux pour un flot max déjà calculé ; ceci
