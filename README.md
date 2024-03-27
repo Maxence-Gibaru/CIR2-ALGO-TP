@@ -505,6 +505,8 @@ que la demande. Vous pouvez vous limiter à deux pays que vous aurez choisis.
 
 ![Graphe Usine 4](/documents/images/grapheUsine4.png "Graphe Usine Partie 4")
 
+On obtient ainsi le graphe ci-dessus qui est très conséquent par le nombre d'arcs de production, stockages, transferts et demandes. 
+
 - **C++**. Adaptez votre code pour le problème avec toutes les capacités (production,
 transfert et stockage) appliquées aux 3 pays en reprenant les valeurs des tableaux
 ci-dessus. Exécutez ensuite votre programme et reportez les captures d’écran du
@@ -584,9 +586,57 @@ choisir une borne Min et une borne Max pour chacune des demandes et indiquez-les
 dans votre rapport). Relevez le résultat obtenu accompagné de la demande générée
 à travers une copie écran du résultat de la console.
 
-```C++
-INSERT
+Dans un premier temps nous avons implémenté notre moteur de génération de nombres aléatoires
 
+```C++
+
+  // Calcul de la graine basée sur le nombre de lettres dans nos prénoms
+  int mySeed = 6 + 5 + 7 + 6 + 7; // = 31
+
+  // Moteur de nombres aléatoires initialisé avec la graine
+  std::mt19937 gen(mySeed);
+
+  // Distribution pour des nombres entre 1 et 25
+  std::uniform_int_distribution<> dis(-10, 10);
+
+```
+
+La graine de notre générateur est basée sur la somme du nombre de lettres dans chacun de nos prénoms.
+Ainsi, on modifie les demandes dans notre graphe actuel : 
+
+```C++
+
+  // Génération des nombres aléatoires
+  demFrance1 = 15 + dis(gen);
+  demFrance2 = 15 + dis(gen);
+  demBelgique1 = 15 + dis(gen);
+  demBelgique2 = 15 + dis(gen);
+  demSuisse1 = 15 + dis(gen);
+  demSuisse2 = 15 + dis(gen);
+
+  grapheUsine = {
+      {0, capProdFrance1, capProdFrance2, capProdBelgique1, capProdBelgique2, capProdSuisse1, capProdSuisse2, 0}, // sommet s
+      {0, 0, capStockFrance, capTransFB1, 0, capTransFS1, 0, demFrance1},                                         // sommet France t1
+      {0, 0, 0, 0, capTransFB2, 0, capTransFS2, demFrance2},                                                      // sommet France t2
+      {0, capTransBF1, 0, 0, capStockBelgique, capTransBS1, 0, demBelgique1},                                     // sommet Belgique t1
+      {0, 0, capTransBF2, 0, 0, 0, capTransBS2, demBelgique2},                                                    // sommet Belgique t2
+      {0, capTransSF1, 0, capTransSB1, 0, 0, capStockSuisse, demSuisse1},                                         // sommet Suisse t1
+      {0, 0, capTransSF2, 0, capTransSB2, 0, 0, demSuisse2},                                                      // sommet Suisse t2
+      {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
+  };
+```
+Enfin, on re-applique l'algorithme de Ford-Fulkerson afin de déterminer le nouveau flot maximal. 
+
+```C++
+  flotMax = fordFulkerson(grapheUsine, s, t);
+
+  if (!DISPLAY)
+  {
+    std::cout << "Le flot maximal pour ce cinquième graphe est : " << flotMax << std::endl;
+  }
+```
+```bash
+>>> Le flot maximal pour ce cinquième graphe est : 68
 ```
 
 En considérant des périodes de 15 jours (T1 et T2 formant un mois), on peut simuler ce que
@@ -595,17 +645,14 @@ indépendant.
 
 - **C++**. Modifiez votre code de façon à itérer 12 fois sur la recherche du flot maximum
 et où la demande aura changé autant de fois et selon les règles de la question
-précédente15. Formater l’affichage du résultat (flot max) obtenu sur le terminal de
+précédente. Formater l’affichage du résultat (flot max) obtenu sur le terminal de
 façon à faire apparaître, pour chacune des 12 itérations :
 - la demande aléatoire générée (pour chaque arc),
 - le pourcentage de la demande satisfaite pour chaque mois,
 Relevez enfin le pourcentage de la demande satisfaite sur l’année. Reportez des
 copies-écrans de ces résultats dans votre rapport.
 
-```C++
 
-insert
-```
 
 
 
