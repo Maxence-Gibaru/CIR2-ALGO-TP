@@ -707,7 +707,7 @@ Sur une année, le flot max ne change pas énormément. Le plus gros écart par 
 **Partie 4**
 
 - **C++**. Génération des coûts. On va tout d’abord chercher à générer l’ensemble des
-coûts 𝑐(𝑖, 𝑗), 𝑖, 𝑗 ∈ 𝑋, pour tous les arcs qui ne sont pas des arcs de demande16 :
+coûts 𝑐(𝑖, 𝑗), 𝑖, 𝑗 ∈ 𝑋, pour tous les arcs qui ne sont pas des arcs de demande :
 - les coûts de stockage,
 - les coûts de transfert,
 - les coûts de production.
@@ -718,8 +718,146 @@ grapheEtCapacites, mais cette fois pour sauvegarder les coûts générés. Relev
 graphe des coûts que vous obtenez dans votre rapport.
 
 ```C++
-INSERT
+// Définition de tous les arcs pour la France
+  capProdFrance1 = dis(gen);
+  capProdFrance2 = dis(gen);
+  capStockFrance = dis(gen);
+  capTransFB1 = dis(gen);
+  capTransFB2 = dis(gen);
+  capTransFS1 = dis(gen);
+  capTransFS2 = dis(gen);
+  demFrance1 = dis(gen);
+  demFrance2 = dis(gen);
+
+  // Définition de tous les arcs pour la Belgique
+  capProdBelgique1 = dis(gen);
+  capProdBelgique2 = dis(gen);
+  capStockBelgique = dis(gen);
+  capTransBF1 = dis(gen);
+  capTransBF2 = dis(gen);
+  capTransBS1 = dis(gen);
+  capTransBS2 = dis(gen);
+  demBelgique1 = dis(gen);
+  demBelgique2 = dis(gen);
+
+  // Définition de tous les arcs pour la Suisse
+  capProdSuisse1 = dis(gen);
+  capProdSuisse2 = dis(gen);
+  capStockSuisse = dis(gen);
+  capTransSB1 = dis(gen);
+  capTransSB2 = dis(gen);
+  capTransSF1 = dis(gen);
+  capTransSF2 = dis(gen);
+  demSuisse1 = dis(gen);
+  demSuisse2 = dis(gen);
+
+  grapheType grapheUsineCout = {
+      {0, capProdFrance1, capProdFrance2, capProdBelgique1, capProdBelgique2, capProdSuisse1, capProdSuisse2, 0}, // sommet s
+      {0, 0, capStockFrance, capTransFB1, 0, capTransFS1, 0, 0},                                                  // sommet France t1
+      {0, 0, 0, 0, capTransFB2, 0, capTransFS2, 0},                                                               // sommet France t2
+      {0, capTransBF1, 0, 0, capStockBelgique, capTransBS1, 0, 0},                                                // sommet Belgique t1
+      {0, 0, capTransBF2, 0, 0, 0, capTransBS2, 0},                                                               // sommet Belgique t2
+      {0, capTransSF1, 0, capTransSB1, 0, 0, capStockSuisse, 0},                                                  // sommet Suisse t1
+      {0, 0, capTransSF2, 0, capTransSB2, 0, 0, 0},                                                               // sommet Suisse t2
+      {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
+  };
+
+  if (DISPLAY)
+  {
+    displayMadj(grapheUsineCout);
+  }
 ```
+```bash
+Matrice d'ajdacence du graphe : 
+0 | 17 |  4 |  5 |  2 | 10 | 17 | 0 | 
+0 |  0 |  3 | 26 |  0 | 18 |  0 | 0 | 
+0 |  0 |  0 |  0 | 12 |  0 | 21 | 0 | 
+0 |  7 |  0 |  0 | 23 | 14 |  0 | 0 | 
+0 |  0 | 31 |  0 |  0 |  0 |  4 | 0 | 
+0 |  2 |  0 | 15 |  0 |  0 | 30 | 0 | 
+0 |  0 |  9 |  0 |  9 |  0 |  0 | 0 | 
+0 |  0 |  0 |  0 |  0 |  0 |  0 | 0 |
+```
+
+- **C++**. Partie libre. Modifiez votre code de l'algorithme de Ford Fulkerson de façon à
+pouvoir calculer le coût d’une solution. Ainsi, il faut trouver ici un moyen de déduire le
+parcours des unités de flots.
+Ensuite, trouvez une manière de calculer le coût total pour faire la somme des
+produits des coûts de chaque arc par le nombre des unités de flots qui le traverse.
+
+```C++
+
+// Fonction Ford-Fulkerson Coût
+int fordFulkersonCost(grapheType &myGraph, grapheType &myCostGraph, int s, int t)
+{
+  int n = myGraph.size(); // Nombre de sommets dans le graphe
+
+  // Créer le graphe résiduel initialisé avec les mêmes capacités que le graphe d'origine
+  grapheType grapheResiduel = myGraph;
+
+  // Deux indices de sommets utilisés tout le long de l'algorithme
+  int u, v;
+
+  // Vecteur pour sauvegarder les prédécesseurs des sommets sur le chemin améliorant
+  std::vector<int> predDansCheminAmeliorant(n, -1);
+
+  // Initialiser le flot maximal à 0
+  int max_flow = 0;
+  int totalCost = 0;
+
+  // Boucle principale de l'algorithme
+  while (parcoursLargeur(grapheResiduel, s, t, predDansCheminAmeliorant))
+  {
+    std::vector<int> cheminAmeliorant = reconstruireChemin(s, t, predDansCheminAmeliorant);
+    for (auto &sommet : cheminAmeliorant)
+    {
+      if (DISPLAY)
+      {
+        std::cout << sommet << " -> ";
+      }
+    }
+
+    // Trouver la capacité résiduelle minimale le long du chemin améliorant
+
+    // Initialisation du flot parcourant le chemin améliorant
+    // Celui est initalisé à INT32_MAX, pour simuler une valeur "infinie"
+    // ainsi, on est sûr qu'il n'y aura pas de problème lorsqu'il sera mis à jour en comparant sa valeur avec la capacité du chemin
+    int ameliorationFlot = INT32_MAX;
+
+    // Parcours chaque noeud v du chemin améliorant de t à s (dans l'autre sens)
+    for (v = t; v != s; v = predDansCheminAmeliorant[v])
+    {
+      u = predDansCheminAmeliorant[v];
+      ameliorationFlot = std::min(ameliorationFlot, grapheResiduel[u][v]);
+      totalCost += myCostGraph[u][v] * ameliorationFlot;
+      if (DISPLAY)
+      {
+        std::cout << "cost : " << totalCost << std::endl;
+      }
+    }
+
+    // Ajouter le flot minimum trouvé au flot maximal
+    max_flow += ameliorationFlot;
+    if (DISPLAY)
+    {
+      std::cout << "fin de chemin |"
+                << " flot max = " << max_flow << std::endl;
+    }
+    // Mettre à jour les capacités résiduelles du graphe résiduel
+    for (v = t; v != s; v = predDansCheminAmeliorant[v])
+    {
+      u = predDansCheminAmeliorant[v];
+      grapheResiduel[u][v] -= ameliorationFlot; // Réduire la capacité sur l'arc direct
+      grapheResiduel[v][u] += ameliorationFlot; // Ajouter de la capacité sur l'arc inverse (rétrogradation)                                // Remonter le chemin améliorant
+    }
+  }
+
+  // Retourner le flot maximal
+  return max_flow, totalCost;
+}
+```
+
+
 
 **Algo**. Partie libre. Imaginez, puis écrire l’algorithme cherchant : soit le planning le
 moins coûteux, soit un des moins coûteux pour un flot max déjà calculé ; ceci
