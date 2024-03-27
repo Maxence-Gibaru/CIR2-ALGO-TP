@@ -2,13 +2,6 @@
 
 ![Junia Banner](/documents/images/junia_banner.jpeg "Junia Banner")
 
-- [ ] Représenter le parcours en longueurs avec dessin 
-- [ ] Ajouter partie 1
-- [ ] Faire le graph des coûts à la main
-- [ ] refaire le graphe que j'ai perdu
-- [ ] faire l'algo calcul coût min
-- [ ] optimiser le code
-
 **Objectifs** : Comprendre, développer et expérimenter l’algorithme de Ford-Fulkerson sur les différentes situations proposées. Ce TD&P noté devrait mettre en valeur la puissance d’une modélisation d’un problème réel en un problème de flots dans un graphe. Au travers d’une application concrète, on cherche à satisfaire les consommations localisées d’un produit manufacturé selon la capacité de production, de transport, et de stockage de plusieurs usines de fabrication.
 
 ## Table de matière :
