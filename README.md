@@ -55,7 +55,7 @@ Nous allons tout d’abord enregistrer un graphe en mémoire avec les techniques
 
 - **Question** : Quelle matrice est donnée en exemple dans le cours pour à la fois enregistrer l’existence d’un arc mais aussi leur poids (i.e., leur coût).
 
-La matrice donnée dans le cours est la matrice d’adjacence **Madj** :
+La matrice donnée dans le cours qui permet de représenter un graphe est la matrice d’adjacence notée **Madj** :
 
 ![Matrice Adjacence](/documents/images/matriceAdjacence.png "Matrice Adjacence")
 
