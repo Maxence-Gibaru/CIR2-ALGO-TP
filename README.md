@@ -94,6 +94,7 @@ Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherc
 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 70|
 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
+Cette matrice se lit des lignes vers les colonnes, ainsi l'arc de 1 vers 4 (Rotterdam -> New York) nous donne 60 de capacité.
 
 - **C++** : Utilisez soit un tableau 2D (type C), soit un double vector, soit un array afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
 
@@ -102,8 +103,8 @@ On obtient cette sortie qui correspond bien à la matrice.
 
 ```C++
 
-// Définition du type de notre matrice d'adjacence
-using grapheType = std::vector<std::vector<int>>;
+  // Définition du type de notre matrice d'adjacence
+  using grapheType = std::vector<std::vector<int>>;
 
 
   // Initialisation de la matrice d'adjacence grapheEtCapacites
