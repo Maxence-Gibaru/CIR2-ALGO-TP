@@ -786,7 +786,6 @@ Ensuite, trouvez une manière de calculer le coût total pour faire la somme des
 produits des coûts de chaque arc par le nombre des unités de flots qui le traverse.
 
 ```C++
-
 // Fonction Ford-Fulkerson Coût
 int fordFulkersonCost(grapheType &myGraph, grapheType &myCostGraph, int s, int t)
 {
@@ -856,13 +855,14 @@ int fordFulkersonCost(grapheType &myGraph, grapheType &myCostGraph, int s, int t
   return max_flow, totalCost;
 }
 ```
-
-
+```
+>>> Le cout total de ce graphe est : 1146
+```
 
 **Algo**. Partie libre. Imaginez, puis écrire l’algorithme cherchant : soit le planning le
 moins coûteux, soit un des moins coûteux pour un flot max déjà calculé ; ceci
 correspond respectivement à écrire soit une méthode exacte, soit une méthode
-approchée18. Que vous fassiez le premier ou le second choix, prenez le temps de
+approchée. Que vous fassiez le premier ou le second choix, prenez le temps de
 bien expliquer votre algorithme dans votre rapport.
 
 Dans un premier temps, nous allons expérimenter des tests sur des graphes avec moins de sommets que le dernier que l'on vient de faire ci-dessus. 
