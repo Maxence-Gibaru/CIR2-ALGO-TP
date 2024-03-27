@@ -33,6 +33,11 @@ int main()
       {0, 0, 0, 0, 0, 0, 0}     // Los Angeles (6)
   };
 
+  if (DISPLAY)
+  {
+    displayMadj(grapheEtCapacites);
+  }
+
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
   /*                             Partie 2 - Étape 2 : Le parcours en largeur au service                               */
   /*                                       de la recherche du chemin améliorant                                       */
@@ -89,6 +94,23 @@ int main()
     std::cout << fordFulkerson(grapheEtCapacites, s, t) << std::endl;
   }
 
+  grapheType graphePartie1 = {
+      {0, 10, 10, 0, 0, 0}, // sommet s
+      {0, 0, 2, 4, 8, 0},   // sommet a
+      {0, 0, 0, 0, 9, 0},   // sommet b
+      {0, 0, 0, 0, 0, 10},  // sommet c
+      {0, 0, 0, 6, 0, 10},  // sommet d
+      {0, 0, 0, 0, 0, 0},   // sommet t
+  };
+
+  s = 0;
+  t = 5;
+
+  if (DISPLAY)
+  {
+    std::cout << fordFulkerson(graphePartie1, s, t) << std::endl;
+  }
+
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
   /*                             Partie 3 - Étape 1 : Production libre et satisfaction de la demande                  */
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
@@ -130,6 +152,13 @@ int main()
       {0, 0, 0, 0, demSuisse},                               // sommet 4
       {0, 0, 0, 0, 0},                                       // sommet 5
   };
+
+  flotMax = fordFulkerson(grapheUsine, s, t);
+
+  if (DISPLAY)
+  {
+    std::cout << "Le flot maximal pour ce deuxième graphe est : " << flotMax << std::endl;
+  }
 
   /*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
   /*                             Partie 3 - Étape 3 : Production et transfert limités                                 */
@@ -212,6 +241,13 @@ int main()
       {0, 0, capTransSF2, 0, capTransSB2, 0, 0, demSuisse2},                                                      // sommet Suisse t2
       {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
   };
+
+  flotMax = fordFulkerson(grapheUsine, s, t);
+
+  if (!DISPLAY)
+  {
+    std::cout << "Le flot maximal pour ce quatrième graphe est : " << flotMax << std::endl;
+  }
 
   // faire le graphe à la main pour vérifier le résultat
 

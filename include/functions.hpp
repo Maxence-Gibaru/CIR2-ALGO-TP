@@ -7,6 +7,19 @@
 // Définition du type de notre matrice d'adjacence
 using grapheType = std::vector<std::vector<int>>;
 
+void displayMadj(grapheType &myGraph)
+{
+  std::cout << "Matrice d'ajdacence du graphe : " << std::endl;
+  for (int i = 0; i < myGraph.size(); i++)
+  {
+    for (int j = 0; j < myGraph.size(); j++)
+    {
+      std::cout << myGraph[i][j] << " | ";
+    }
+    std::cout << std::endl;
+  }
+}
+
 // Fonction pour reconstruire le chemin améliorant à partir de predDansCheminAmeliorant
 std::vector<int> reconstruireChemin(int s, int t, const std::vector<int> &predDansCheminAmeliorant)
 {
