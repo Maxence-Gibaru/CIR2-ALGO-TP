@@ -768,7 +768,7 @@ graphe des coûts que vous obtenez dans votre rapport.
   }
 ```
 ```bash
-Matrice d'ajdacence du graphe : 
+>>> Matrice d'ajdacence du graphe : 
 0 | 17 |  4 |  5 |  2 | 10 | 17 | 0 | 
 0 |  0 |  3 | 26 |  0 | 18 |  0 | 0 | 
 0 |  0 |  0 |  0 | 12 |  0 | 21 | 0 | 
