@@ -2,21 +2,21 @@
 
 ![Junia Banner](/documents/images/junia_banner.jpeg "Junia Banner")
 
+Auteurs : 
+
+GIBARU Maxence, MORY Mathis, L'HERMITTE Clement, OWEIDAT Mohamad, VICO Robin
+
 **Objectifs** : Comprendre, développer et expérimenter l’algorithme de Ford-Fulkerson sur les différentes situations proposées. Ce TD&P noté devrait mettre en valeur la puissance d’une modélisation d’un problème réel en un problème de flots dans un graphe. Au travers d’une application concrète, on cherche à satisfaire les consommations localisées d’un produit manufacturé selon la capacité de production, de transport, et de stockage de plusieurs usines de fabrication.
 
 ## Table de matière :
 
 1. [Trace de l’algorithme de Ford-Fulkerson.](#trace-de-l'agorithme-de-Ford-Fulkerson)
 2. [Implémentation de l’algorithme de parcours en largeur puis de l’algorithme de Ford-Fulkerson qui se servira du parcours.](#partie-2)
-
-- [Étape 1 : Représentation mémoire du graphe](#Étape1)
-- [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.](#Étape2)
-
 3. [Compréhension et modélisation de problèmes réels en graphes et recherche du flot maximum dans ces derniers. Les arcs des graphes supportent des capacités.](#problèmes-réels)
 4. [A vous de jouer sur l’écriture d’un algorithme qui va calculer le coût minimal d’un flot dont la valeur (i.e., le nombre d’unités) a déjà été calculée. Les arcs des graphes supportent des capacités et des coûts.](#Partie4)
 5. [Bonus.](#Bonus)
 
-## Partie 1
+## Partie 1 : Trace de l’algorithme de Ford-Fulkerson.
 
 - **Trace**. On va tout d’abord s’exercer “à la main” sur un exemple simple. Déroulez
   l’algorithme de Ford-Fulkerson sur l’exemple ci-dessous afin de calculer le flot max
@@ -33,9 +33,9 @@ Etant donné qu’il n’est plus possible de trouver de chemin améliorant à c
 La somme des flots sortants du la source **s : 9 + 10**
 La somme des flots entrants dans le puits **t : 10 + 9**
 
-## Partie 2
+## Partie 2 : Implémentation de l’algorithme de parcours en largeur puis de l’algorithme de Ford-Fulkerson qui se servira du parcours.
 
-**Etape 1**
+### Etape 1 : Représentation mémoire du graphe.
 
 Nous allons tout d’abord enregistrer un graphe en mémoire avec les techniques vues en cours.
 
@@ -126,7 +126,7 @@ displayMadj(
 
 ```
 
-Etape 2
+### Etape 2 : Le parcours en largeur au service de la recherche du chemin améliorant.
 
 Nous avons déjà vu en cours que l'efficacité de l’algorithme de Ford-Fulkerson dépendait principalement de la recherche du chemin améliorant. Un tel algorithme peut être basé sur un algorithme de parcours, et c’est, comme souvent, le parcours en largeur qui sera implémenté ici.
 
@@ -329,9 +329,9 @@ On peut également essayer la fonction fordFulkerson sur le graphe qu'on a itér
 
 Cela retourne bien le même résultat trouvé à la main ultérieurement.
 
-## Problèmes réels
+## Partie 3 : Compréhension et modélisation de problèmes réels en graphes et recherche du flot maximum dans ces derniers. Les arcs des graphes supportent des capacités.
 
-Partie 3 étape 1: faire les graphes flots et résiduels avec le flot infini
+### Etape 1: Production libre et satisfaction de la demande.
 
 Imaginez avoir la responsabilité d’une société disposant de 3 usines produisant des tonnes
 de tablettes de chocolat9, chacune dans un pays différent. Pour chaque pays i, il y a une
@@ -385,6 +385,8 @@ On obtient ainsi en console le résultat suivant :
 >>> Le flot maximal pour ce premier graphe est : 31
 ```
 
+### Etape 2 Production limitée et satisfaction de la demande.
+
 - **Représentation de Graphe**. A partir de la situation précédente, mettez à jour le
   graphe donné plus haut en y ajoutant les capacités de production du tableau
   ci-dessous. Réfléchissez à l'endroit où interviennent ces capacités. Reportez votre
@@ -425,7 +427,7 @@ On peut ainsi modéliser les capacités de productions sur les arcs 1>2, 1>3, 1>
 
 On constate qu'en rajoutant les capacités de productions, on obtient le même flot maximal qu'à la question précédente.
 
-**Etape 3**
+### Etape 3 : Production et transfert limités et satisfaction de la demande.
 
 On ajoute maintenant la possibilité de transférer les unités de chocolat entre les usines une
 fois celles-ci produites. Les transferts d’unité de chocolat peuvent être considérés comme
@@ -473,7 +475,7 @@ la capacité de transfert de l’usine i vers l’usine j est notée CapTrans(i>
 
 En rajoutant les capacités de transfert, on obtient un flot maximal plus important.
 
-**Etape 4**
+### Étape 4. Production, transfert et stockage limités et satisfaction de la demande.
 
 Nous allons maintenant considérer plusieurs périodes de temps afin de pouvoir stocker les
 produits d’une période à l’autre et ceci dans chaque pays. Cela permet de nouvelles
@@ -573,7 +575,7 @@ On obtient ainsi le graphe ci-dessus qui est très conséquent par le nombre d'a
 >>> Le flot maximal pour ce quatrième graphe est : 58
 ```
 
-**Etape 5**
+### Étape 5. Demande aléatoire.
 
 Pour anticiper (ou pas) une période troublée, vous essayez d’évaluer la robustesse de votre
 système de production devant une demande variable.
@@ -703,7 +705,7 @@ Mois n°12 Le flot maximal pour ce cinquième graphe est : 61
 
 Sur une année, le flot max ne change pas énormément. Le plus gros écart par rapport au flot maximal initial trouvé est de 9.
 
-**Partie 4**
+## Partie 4 : vous de jouer sur l’écriture d’un algorithme qui va calculer le coût minimal d’un flot dont la valeur (i.e., le nombre d’unités) a déjà été calculée. Les arcs des graphes supportent des capacités et des coûts.
 
 - **C++**. Génération des coûts. On va tout d’abord chercher à générer l’ensemble des
   coûts 𝑐(𝑖, 𝑗), 𝑖, 𝑗 ∈ 𝑋, pour tous les arcs qui ne sont pas des arcs de demande :
@@ -1018,3 +1020,6 @@ Mais nous pensons que la méthode est trop coûteuse et prends trop de temps.
   imaginer que les coûts unitaires sont alors des distances.
 
 Pour obtenir le plus court chemin entre les sommets s et t dans un graphe où les coûts unitaires représentent des distances, nous pouvons utiliser un algorithme de recherche de chemin le plus court tel que l'algorithme de Dijkstra ou l'algorithme de Bellman-Ford.
+
+
+## Bonus (pour le 08/04)
