@@ -244,7 +244,7 @@ int main()
 
   flotMax = fordFulkerson(grapheUsine, s, t);
 
-  if (!DISPLAY)
+  if (DISPLAY)
   {
     std::cout << "Le flot maximal pour ce quatrième graphe est : " << flotMax << std::endl;
   }
@@ -392,7 +392,13 @@ int main()
       {0, 0, 0, 0, 0},
   };
 
+  if (DISPLAY)
+  {
+    std::cout << fordFulkerson(grapheUsine, 0, 4) << std::endl; // 27
+  }
   fordFulkersonCost(grapheUsine, grapheUsineCost, 0, 4);
+
+  std::cout << findMinCostForMaxFlow(grapheUsine, grapheUsineCost, 0, 4, 27) << std::endl;
 
   return 0;
 }

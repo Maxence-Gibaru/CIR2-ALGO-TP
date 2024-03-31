@@ -219,3 +219,49 @@ int fordFulkersonCost(grapheType &myGraph, grapheType &myCostGraph, int s, int t
   // Retourner le flot maximal
   return max_flow;
 }
+
+
+// Fonction pour trouver le planning le moins coûteux pour un flot maximal donné
+int findMinCostForMaxFlow(grapheType &myGraph, grapheType &myCostGraph, int s, int t, int max_flow)
+{
+  int low = 0;          // Initialisation de la borne inférieure
+  int high = INT32_MAX; // Initialisation de la borne supérieure
+
+  while (high - low > 0.001)
+  {                             // Tant que la différence entre low et high est significative
+    int mid = (low + high) / 2; // Calcul du coût moyen
+
+    // Modifiez les capacités des arcs du graphe résiduel en fonction de mid
+    grapheType grapheResiduel = myGraph;
+    for (int i = 0; i < grapheResiduel.size(); ++i)
+    {
+      for (int j = 0; j < grapheResiduel[i].size(); ++j)
+      {
+        if (myCostGraph[i][j] <= mid)
+        {
+          grapheResiduel[i][j] = myGraph[i][j]; // Garder la capacité originale
+        }
+        else
+        {
+          grapheResiduel[i][j] = 0; // Réduire la capacité à zéro pour les arcs ayant un coût supérieur à mid
+        }
+      }
+    }
+
+    // Utilisation de l'algorithme de Ford-Fulkerson pour trouver le flot maximal
+    int current_flow = fordFulkerson(grapheResiduel, s, t);
+
+    // Mise à jour des bornes en fonction du résultat de l'algorithme de Ford-Fulkerson
+    if (current_flow == max_flow)
+    {
+      high = mid;
+    }
+    else
+    {
+      low = mid;
+    }
+  }
+
+  // Retourner le coût minimal trouvé
+  return high;
+}

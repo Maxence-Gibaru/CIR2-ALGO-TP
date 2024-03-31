@@ -7,28 +7,24 @@
 ## Table de matière :
 
 1. [Trace de l’algorithme de Ford-Fulkerson.](#trace-de-l'agorithme-de-Ford-Fulkerson)
-
 2. [Implémentation de l’algorithme de parcours en largeur puis de l’algorithme de Ford-Fulkerson qui se servira du parcours.](#partie-2)
 
-  - [Étape 1 : Représentation mémoire du graphe](#Étape1)
-  - [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.](#Étape2)
+- [Étape 1 : Représentation mémoire du graphe](#Étape1)
+- [Étape 2. Le parcours en largeur au service de la recherche du chemin améliorant.](#Étape2)
 
 3. [Compréhension et modélisation de problèmes réels en graphes et recherche du flot maximum dans ces derniers. Les arcs des graphes supportent des capacités.](#problèmes-réels)
-
 4. [A vous de jouer sur l’écriture d’un algorithme qui va calculer le coût minimal d’un flot dont la valeur (i.e., le nombre d’unités) a déjà été calculée. Les arcs des graphes supportent des capacités et des coûts.](#Partie4)
-
 5. [Bonus.](#Bonus)
 
-## Partie 1 
+## Partie 1
 
 - **Trace**. On va tout d’abord s’exercer “à la main” sur un exemple simple. Déroulez
-l’algorithme de Ford-Fulkerson sur l’exemple ci-dessous afin de calculer le flot max
-entre les sommets s et t. Votre rapport doit contenir chaque étape de la trace :
+  l’algorithme de Ford-Fulkerson sur l’exemple ci-dessous afin de calculer le flot max
+  entre les sommets s et t. Votre rapport doit contenir chaque étape de la trace :
   - une étape correspond ici à une itération de la boucle “Tant Que” où il faut
-  faire apparaître le graphe résiduel ET le graphe des flots et en mettant en
-  évidence chaque nouveau chemin améliorant et enfin l’absence de celui-ci
-  pour sortir de l’algorithme.
-
+    faire apparaître le graphe résiduel ET le graphe des flots et en mettant en
+    évidence chaque nouveau chemin améliorant et enfin l’absence de celui-ci
+    pour sortir de l’algorithme.
 
 ![Graphe Partie 1](/documents/images/graphePartie1.png "Partie 1")
 
@@ -36,9 +32,6 @@ Etant donné qu’il n’est plus possible de trouver de chemin améliorant à c
 
 La somme des flots sortants du la source **s : 9 + 10**
 La somme des flots entrants dans le puits **t : 10 + 9**
-
-
-
 
 ## Partie 2
 
@@ -53,13 +46,13 @@ La matrice donnée dans le cours qui permet de représenter un graphe est la mat
 ![Matrice Adjacence](/documents/images/matriceAdjacence.png "Matrice Adjacence")
 
 - **Question** : Expliquez l’intérêt des coûts infinis dans une telle matrice.
-  
+
 L’intérêt des coûts infinis dans une telle matrice est de représenter l’absence de liaison entre 2 sommets. Dans les algorithmes de recherche de chemin comme Dijkstra ou Bellman-Ford, les coûts infinis sont utilisés pour indiquer des chemins non parcourables ou des chemins qui n'existent pas.
 
 Nous allons utiliser 2 matrices du même type pour sauvegarder les informations d’un graphe. L’une enregistrera les capacités, l’autre les coûts de chaque arc. La matrice des coûts ne sera utilisée qu’en partie 4 : nous travaillerons d’abord sur la matrice des capacités puisque le gros du travail consistera à trouver un flot max dans les 3 premières parties. Nous évaluerons le flot en termes de coûts dans la dernière partie, mais d’abord nous cherchons à faire passer un certain nombre d'unités de flots en fonction des capacités.
 
 - **Question** : Qu’allez-vous utiliser pour marquer le fait qu’un arc n’existe pas dans la matrice sauvegardant les capacités ?
-  
+
 Pour marquer le fait qu’un arc n’existe pas dans la matrice sauvegardant les capacités, on peut simplement mettre des 0 cela montre que la capacité entre 2 sommets est nulle.
 
 Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherchait à acheminer un maximum d’unités de flot (ici par exemple un nombre maximum d'objets) entre la ville de Stuttgart et Los Angeles. Nous avons trouvé ensemble que le flot maximal attendu était de 150 :
@@ -69,6 +62,7 @@ Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherc
 - **Question** : Représentez la matrice d’adjacence **grapheEtCapacites** pour cet exemple dans votre rapport. A vous d’identifier les indices pour reconnaître les villes associées (e.g., Stuttgart == 0 et Los Angeles == 6). On met de côté la matrice des coûts pour l’instant.
 
   Pour reconnaître les villes on leur donne des indices :
+
 - Stuttgart == 0,
 - Rotterdam == 1,
 - Bordeaux == 2,
@@ -77,21 +71,21 @@ Nous allons tout d’abord reprendre un exemple du cours, celui où l’on cherc
 - New Orleans == 5,
 - Los Angeles == 6.
 
-|   | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
-|---|---|---|---|---|---|---|---|
-| 0 | 0 | 50| 70| 40| 0 | 0 | 0 |
-| 1 | 0 | 0 | 0 | 0 | 60| 0 | 0 |
-| 2 | 0 | 0 | 0 | 0 | 40| 50| 0 |
-| 3 | 0 | 0 | 0 | 0 | 0 | 30| 0 |
-| 4 | 0 | 0 | 0 | 0 | 0 | 0 | 80|
-| 5 | 0 | 0 | 0 | 0 | 0 | 0 | 70|
-| 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+|     | 0   | 1   | 2   | 3   | 4   | 5   | 6   |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0   | 0   | 50  | 70  | 40  | 0   | 0   | 0   |
+| 1   | 0   | 0   | 0   | 0   | 60  | 0   | 0   |
+| 2   | 0   | 0   | 0   | 0   | 40  | 50  | 0   |
+| 3   | 0   | 0   | 0   | 0   | 0   | 30  | 0   |
+| 4   | 0   | 0   | 0   | 0   | 0   | 0   | 80  |
+| 5   | 0   | 0   | 0   | 0   | 0   | 0   | 70  |
+| 6   | 0   | 0   | 0   | 0   | 0   | 0   | 0   |
 
 Cette matrice se lit des lignes vers les colonnes, ainsi l'arc de 1 vers 4 (Rotterdam -> New York) nous donne 60 de capacité.
 
 - **C++** : Utilisez soit un tableau 2D (type C), soit un double vector, soit un array afin d’enregistrer votre matrice d’adjacence grapheEtCapacites décrite à la question précédente.
 
-On utilise ici un double vecteur d'entiers pour enregistrer la matrice d’adjacence grapheEtCapacites : 
+On utilise ici un double vecteur d'entiers pour enregistrer la matrice d’adjacence grapheEtCapacites :
 On obtient cette sortie qui correspond bien à la matrice.
 
 ```C++
@@ -120,15 +114,15 @@ displayMadj(
 
 ```bash
 
->>> Matrice d'ajdacence du graphe : 
+>>> Matrice d'ajdacence du graphe :
 
-0 | 50 | 70 | 40 |  0 |  0 |  0 | 
-0 |  0 |  0 |  0 | 60 |  0 |  0 | 
-0 |  0 |  0 |  0 | 40 | 50 |  0 | 
-0 |  0 |  0 |  0 |  0 | 30 |  0 | 
-0 |  0 |  0 |  0 |  0 |  0 | 80 | 
-0 |  0 |  0 |  0 |  0 |  0 | 70 | 
-0 |  0 |  0 |  0 |  0 |  0 |  0 | 
+0 | 50 | 70 | 40 |  0 |  0 |  0 |
+0 |  0 |  0 |  0 | 60 |  0 |  0 |
+0 |  0 |  0 |  0 | 40 | 50 |  0 |
+0 |  0 |  0 |  0 |  0 | 30 |  0 |
+0 |  0 |  0 |  0 |  0 |  0 | 80 |
+0 |  0 |  0 |  0 |  0 |  0 | 70 |
+0 |  0 |  0 |  0 |  0 |  0 |  0 |
 
 ```
 
@@ -139,8 +133,6 @@ Nous avons déjà vu en cours que l'efficacité de l’algorithme de Ford-Fulker
 - **C++**. Nous allons maintenant nous attaquer à la boucle principale “Tant Que” de
   l’algorithme. Développez la, en vous basant sur le pseudo code suivant et en vous
   assurant ensuite de pouvoir récupérer le nouveau predDansCheminAmeliorant :
-
-
 
 ![Algo Parcours Longueur](/documents/images/algoParcoursLongueur.png "Algo Longueur")
 
@@ -200,7 +192,7 @@ bool parcoursLargeur(const std::vector<std::vector<int>> &myGraph, int s, int t,
 
 ```
 
-Une fois ces étapes finit le code nous renvoie le parcours améliorant de façon optimisée, en effet nous lui donnons un graphe en paramètres et il nous renvoie son parcours améliorant. Pour vous donner un exemple voici le résultat obtenu quand nous exécutons le programme réalisé avec le graphe donné en énoncé : 
+Une fois ces étapes finit le code nous renvoie le parcours améliorant de façon optimisée, en effet nous lui donnons un graphe en paramètres et il nous renvoie son parcours améliorant. Pour vous donner un exemple voici le résultat obtenu quand nous exécutons le programme réalisé avec le graphe donné en énoncé :
 
 ```bash
 
@@ -218,8 +210,6 @@ note fordFulkerson.
 - **C++**. Terminer l’implémentation de fordFulkerson. La dernière et principale partie de l’algorithme concerne la boucle Tant Que dont le pseudo-code est donné ci-dessous :
 
 ![algoFordFulkerson.png](/documents/images/algoFordFulkerson.png "algoFordFulkerson.png")
-
-
 
 Nous avons donc développé la fonction **fordFulkerson** ci-dessous.
 Elle prend en paramètre un graphe de capacité, les indices des sommets sources et puits.
@@ -285,15 +275,16 @@ int fordFulkerson(std::vector<std::vector<int>> &myGraph, int s, int t)
   return max_flow;
 }
 ```
-Cette fonction renvoit le flot maximal du graphe donné en entrée. 
+
+Cette fonction renvoit le flot maximal du graphe donné en entrée.
 
 ### Etape 4 : Testez votre programme
 
 - **C++**. Joignez les différentes parties de code développées en Partie 2 de façon à
-retrouver un flot max de 150. Reportez la capture d’écran associée au résultat
-obtenu à l’exécution de votre code.
+  retrouver un flot max de 150. Reportez la capture d’écran associée au résultat
+  obtenu à l’exécution de votre code.
 
-En réunissant l'ensemble des fonctions développées dans la partie 2, on peut ainsi tester nos fonctions sur le graphe donné dans l'énoncé. 
+En réunissant l'ensemble des fonctions développées dans la partie 2, on peut ainsi tester nos fonctions sur le graphe donné dans l'énoncé.
 Voici le retour console que l'on obtient :
 
 ```bash
@@ -304,11 +295,12 @@ Voici le retour console que l'on obtient :
 >>> 0 -> 3 -> 5 -> 6 -> fin de chemin | flot max = 150
 
 ```
+
 Valeur flot max retournée : 150
 
 On retrouve bien le flot maximal attendu.
 
-On peut également essayer la fonction fordFulkerson sur le graphe qu'on a itéré à la main dans la partie 1 : 
+On peut également essayer la fonction fordFulkerson sur le graphe qu'on a itéré à la main dans la partie 1 :
 
 ```C++
 
@@ -329,11 +321,13 @@ On peut également essayer la fonction fordFulkerson sur le graphe qu'on a itér
     std::cout << fordFulkerson(graphePartie1, s, t) << std::endl;
   }
 ```
+
 ```bash
 
 >>> Flot maximal du graphe : 19
 ```
-Cela retourne bien le même résultat trouvé à la main ultérieurement. 
+
+Cela retourne bien le même résultat trouvé à la main ultérieurement.
 
 ## Problèmes réels
 
@@ -348,11 +342,11 @@ ici que chaque unité de flot correspond à une unité de chocolat.
 ![Graphe Usine 1](/documents/images/grapheUsine1.png "Graphe Usine")
 
 - **C++**. Représentez ce nouveau graphe en mémoire et liez-le au code écrit dans la
-partie précédente en y incluant la demande. A vous de réfléchir à quoi faire pour
-modéliser les arcs de production avec les différentes techniques vues en cours,
-puisqu’il n’y a pas, pour l’instant, de limitation sur la capacité de production.
+  partie précédente en y incluant la demande. A vous de réfléchir à quoi faire pour
+  modéliser les arcs de production avec les différentes techniques vues en cours,
+  puisqu’il n’y a pas, pour l’instant, de limitation sur la capacité de production.
 
-Pour modéliser les arcs de productions qui pour l'instant n'ont pas de capacités de production, on a décidé de leur assigné une valeur "infinie". 
+Pour modéliser les arcs de productions qui pour l'instant n'ont pas de capacités de production, on a décidé de leur assigné une valeur "infinie".
 La valeur numérique **INT32_MAX** représente le plus grand nombre entier en 32 bits, ce qui suffira pour simuler une infinité :
 
 ```C++
@@ -374,8 +368,8 @@ La valeur numérique **INT32_MAX** représente le plus grand nombre entier en 32
 ```
 
 - **C++**. Exécutez alors Ford-Fulkerson sur ce graphe, puis faites ressortir le flot max.
-Faites une capture d’écran du résultat de votre sortie terminal (IDE ou
-console) pour l’insérer dans votre rapport.
+  Faites une capture d’écran du résultat de votre sortie terminal (IDE ou
+  console) pour l’insérer dans votre rapport.
 
 ```C++
 
@@ -384,23 +378,24 @@ console) pour l’insérer dans votre rapport.
   std::cout << "Le flot maximal pour ce premier graphe est : " << flotMax << std::endl;
 
 ```
-On obtient ainsi en console le résultat suivant : 
 
-```bash 
+On obtient ainsi en console le résultat suivant :
+
+```bash
 >>> Le flot maximal pour ce premier graphe est : 31
 ```
 
 - **Représentation de Graphe**. A partir de la situation précédente, mettez à jour le
-graphe donné plus haut en y ajoutant les capacités de production du tableau
-ci-dessous. Réfléchissez à l'endroit où interviennent ces capacités. Reportez votre
-dessin dans votre rapport. Vous êtes libres du choix de l’outil pour le dessiner.
+  graphe donné plus haut en y ajoutant les capacités de production du tableau
+  ci-dessous. Réfléchissez à l'endroit où interviennent ces capacités. Reportez votre
+  dessin dans votre rapport. Vous êtes libres du choix de l’outil pour le dessiner.
 
 On peut ainsi modéliser les capacités de productions sur les arcs 1>2, 1>3, 1>4 qui n'étaient pas définis avant :
 
 ![Graphe Usine 2](/documents/images/grapheUsine2.png "Graphe Usine2")
 
 - **C++**. Adaptez votre code avec les capacités de production données par le tableau
-précédent, exécutez le, et enfin reportez les captures d’écran du résultat obtenu.
+  précédent, exécutez le, et enfin reportez les captures d’écran du résultat obtenu.
 
 ```C++
 
@@ -423,11 +418,12 @@ précédent, exécutez le, et enfin reportez les captures d’écran du résulta
     std::cout << "Le flot maximal pour ce deuxième graphe est : " << flotMax << std::endl;
   }
 ```
+
 ```bash
 >>> Le flot maximal pour ce deuxième graphe est : 31
 ```
 
-On constate qu'en rajoutant les capacités de productions, on obtient le même flot maximal qu'à la question précédente. 
+On constate qu'en rajoutant les capacités de productions, on obtient le même flot maximal qu'à la question précédente.
 
 **Etape 3**
 
@@ -441,8 +437,8 @@ la capacité de transfert de l’usine i vers l’usine j est notée CapTrans(i>
 ![Graphe Usine 3](/documents/images/grapheUsine3.png "Graphe Usine Partie 3")
 
 - **C++**. Adaptez votre code précédent à ces capacités de transfert et cette nouvelle
-demande, exécutez le, et enfin reportez les captures d’écran du résultat obtenu dans
-votre rendu.
+  demande, exécutez le, et enfin reportez les captures d’écran du résultat obtenu dans
+  votre rendu.
 
 ```C++
 
@@ -469,6 +465,7 @@ votre rendu.
     std::cout << "Le flot maximal pour ce troisième graphe est : " << flotMax << std::endl;
   }
 ```
+
 ```bash
 
 >>> Le flot maximal pour ce troisième graphe est : 42
@@ -486,6 +483,7 @@ stocker des d’unités de chocolat produites. Nous allons voir comment représe
 périodes. Pour cela, “clonons” chaque sommet “usine” de façon à avoir un sommet par pays
 et par période de temps. Si on considère deux périodes de temps t1 et t2, nous avons les
 sommets suivants :
+
 - (2.1) et (2.2) : respectivement l’usine en France pour les périodes 1 et 2 ;
 - (3.1) et (3.2) : respectivement l’usine en Belgique pour les périodes 1 et 2 ;
 - (4.1) et (4.2) : respectivement l’usine en Suisse pour les périodes 1 et 2.
@@ -499,18 +497,18 @@ de chocolat de la période t1 à la période t2 de l’usine i consomme une unit
 notée CapStock(i.t1).
 
 - **Représentation de Graphe**. En vous aidant de la figure ci-dessous qui ne
-représente que les capacités de production et de stockage d’un seul pays, dessinez
-le graphe “global” pour toutes les capacités (production, stockage et transfert), ainsi
-que la demande. Vous pouvez vous limiter à deux pays que vous aurez choisis.
+  représente que les capacités de production et de stockage d’un seul pays, dessinez
+  le graphe “global” pour toutes les capacités (production, stockage et transfert), ainsi
+  que la demande. Vous pouvez vous limiter à deux pays que vous aurez choisis.
 
 ![Graphe Usine 4](/documents/images/grapheUsine4.png "Graphe Usine Partie 4")
 
-On obtient ainsi le graphe ci-dessus qui est très conséquent par le nombre d'arcs de production, stockages, transferts et demandes. 
+On obtient ainsi le graphe ci-dessus qui est très conséquent par le nombre d'arcs de production, stockages, transferts et demandes.
 
 - **C++**. Adaptez votre code pour le problème avec toutes les capacités (production,
-transfert et stockage) appliquées aux 3 pays en reprenant les valeurs des tableaux
-ci-dessus. Exécutez ensuite votre programme et reportez les captures d’écran du
-résultat obtenu.
+  transfert et stockage) appliquées aux 3 pays en reprenant les valeurs des tableaux
+  ci-dessus. Exécutez ensuite votre programme et reportez les captures d’écran du
+  résultat obtenu.
 
 ```C++
 
@@ -570,6 +568,7 @@ résultat obtenu.
     std::cout << "Le flot maximal pour ce quatrième graphe est : " << flotMax << std::endl;
   }
 ```
+
 ```bash
 >>> Le flot maximal pour ce quatrième graphe est : 58
 ```
@@ -580,11 +579,11 @@ Pour anticiper (ou pas) une période troublée, vous essayez d’évaluer la rob
 système de production devant une demande variable.
 
 - **C++**. En vous basant sur les travaux de l’étape précédente, adaptez votre code de
-façon à considérer des demandes générées aléatoirement14 mais dont les valeurs,
-inférieures ou supérieures, restent assez proches des valeurs initiales (à vous de
-choisir une borne Min et une borne Max pour chacune des demandes et indiquez-les
-dans votre rapport). Relevez le résultat obtenu accompagné de la demande générée
-à travers une copie écran du résultat de la console.
+  façon à considérer des demandes générées aléatoirement14 mais dont les valeurs,
+  inférieures ou supérieures, restent assez proches des valeurs initiales (à vous de
+  choisir une borne Min et une borne Max pour chacune des demandes et indiquez-les
+  dans votre rapport). Relevez le résultat obtenu accompagné de la demande générée
+  à travers une copie écran du résultat de la console.
 
 Dans un premier temps nous avons implémenté notre moteur de génération de nombres aléatoires
 
@@ -602,7 +601,7 @@ Dans un premier temps nous avons implémenté notre moteur de génération de no
 ```
 
 La graine de notre générateur est basée sur la somme du nombre de lettres dans chacun de nos prénoms.
-Ainsi, on modifie les demandes dans notre graphe actuel : 
+Ainsi, on modifie les demandes dans notre graphe actuel :
 
 ```C++
 
@@ -625,7 +624,8 @@ Ainsi, on modifie les demandes dans notre graphe actuel :
       {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
   };
 ```
-Enfin, on re-applique l'algorithme de Ford-Fulkerson afin de déterminer le nouveau flot maximal. 
+
+Enfin, on re-applique l'algorithme de Ford-Fulkerson afin de déterminer le nouveau flot maximal.
 
 ```C++
   flotMax = fordFulkerson(grapheUsine, s, t);
@@ -635,6 +635,7 @@ Enfin, on re-applique l'algorithme de Ford-Fulkerson afin de déterminer le nouv
     std::cout << "Le flot maximal pour ce cinquième graphe est : " << flotMax << std::endl;
   }
 ```
+
 ```bash
 >>> Le flot maximal pour ce cinquième graphe est : 68
 ```
@@ -644,13 +645,13 @@ le système de production est capable de supporter sur une année. Ici chaque mo
 indépendant.
 
 - **C++**. Modifiez votre code de façon à itérer 12 fois sur la recherche du flot maximum
-et où la demande aura changé autant de fois et selon les règles de la question
-précédente. Formater l’affichage du résultat (flot max) obtenu sur le terminal de
-façon à faire apparaître, pour chacune des 12 itérations :
+  et où la demande aura changé autant de fois et selon les règles de la question
+  précédente. Formater l’affichage du résultat (flot max) obtenu sur le terminal de
+  façon à faire apparaître, pour chacune des 12 itérations :
 - la demande aléatoire générée (pour chaque arc),
 - le pourcentage de la demande satisfaite pour chaque mois,
-Relevez enfin le pourcentage de la demande satisfaite sur l’année. Reportez des
-copies-écrans de ces résultats dans votre rapport.
+  Relevez enfin le pourcentage de la demande satisfaite sur l’année. Reportez des
+  copies-écrans de ces résultats dans votre rapport.
 
 ```C++
 
@@ -674,7 +675,7 @@ copies-écrans de ces résultats dans votre rapport.
         {0, 0, 0, 0, 0, 0, 0, 0},                                                                                   // sommet t
     };
 
-    
+
 
     flotMax = fordFulkerson(grapheUsine, s, t);
 
@@ -684,6 +685,7 @@ copies-écrans de ces résultats dans votre rapport.
     }
   }
 ```
+
 ```bash
 Mois n°1 Le flot maximal pour ce cinquième graphe est : 68
 Mois n°2 Le flot maximal pour ce cinquième graphe est : 68
@@ -699,23 +701,20 @@ Mois n°11 Le flot maximal pour ce cinquième graphe est : 68
 Mois n°12 Le flot maximal pour ce cinquième graphe est : 61
 ```
 
-Sur une année, le flot max ne change pas énormément. Le plus gros écart par rapport au flot maximal initial trouvé est de 9. 
-
-
-
+Sur une année, le flot max ne change pas énormément. Le plus gros écart par rapport au flot maximal initial trouvé est de 9.
 
 **Partie 4**
 
 - **C++**. Génération des coûts. On va tout d’abord chercher à générer l’ensemble des
-coûts 𝑐(𝑖, 𝑗), 𝑖, 𝑗 ∈ 𝑋, pour tous les arcs qui ne sont pas des arcs de demande :
+  coûts 𝑐(𝑖, 𝑗), 𝑖, 𝑗 ∈ 𝑋, pour tous les arcs qui ne sont pas des arcs de demande :
 - les coûts de stockage,
 - les coûts de transfert,
 - les coûts de production.
-Générez des coûts différents pour chaque type d’arc (production, transfert et
-stockage) et cela pour chacun des pays en vous aidant de la génération de nombres
-pseudo-aléatoires. Ainsi, servez-vous d’une matrice de la même taille que
-grapheEtCapacites, mais cette fois pour sauvegarder les coûts générés. Relever le
-graphe des coûts que vous obtenez dans votre rapport.
+  Générez des coûts différents pour chaque type d’arc (production, transfert et
+  stockage) et cela pour chacun des pays en vous aidant de la génération de nombres
+  pseudo-aléatoires. Ainsi, servez-vous d’une matrice de la même taille que
+  grapheEtCapacites, mais cette fois pour sauvegarder les coûts générés. Relever le
+  graphe des coûts que vous obtenez dans votre rapport.
 
 ```C++
 // Définition de tous les arcs pour la France
@@ -767,23 +766,24 @@ graphe des coûts que vous obtenez dans votre rapport.
     displayMadj(grapheUsineCout);
   }
 ```
+
 ```bash
->>> Matrice du graphe : 
-0 | 17 |  4 |  5 |  2 | 10 | 17 | 0 | 
-0 |  0 |  3 | 26 |  0 | 18 |  0 | 0 | 
-0 |  0 |  0 |  0 | 12 |  0 | 21 | 0 | 
-0 |  7 |  0 |  0 | 23 | 14 |  0 | 0 | 
-0 |  0 | 31 |  0 |  0 |  0 |  4 | 0 | 
-0 |  2 |  0 | 15 |  0 |  0 | 30 | 0 | 
-0 |  0 |  9 |  0 |  9 |  0 |  0 | 0 | 
+>>> Matrice du graphe :
+0 | 17 |  4 |  5 |  2 | 10 | 17 | 0 |
+0 |  0 |  3 | 26 |  0 | 18 |  0 | 0 |
+0 |  0 |  0 |  0 | 12 |  0 | 21 | 0 |
+0 |  7 |  0 |  0 | 23 | 14 |  0 | 0 |
+0 |  0 | 31 |  0 |  0 |  0 |  4 | 0 |
+0 |  2 |  0 | 15 |  0 |  0 | 30 | 0 |
+0 |  0 |  9 |  0 |  9 |  0 |  0 | 0 |
 0 |  0 |  0 |  0 |  0 |  0 |  0 | 0 |
 ```
 
 - **C++**. Partie libre. Modifiez votre code de l'algorithme de Ford Fulkerson de façon à
-pouvoir calculer le coût d’une solution. Ainsi, il faut trouver ici un moyen de déduire le
-parcours des unités de flots.
-Ensuite, trouvez une manière de calculer le coût total pour faire la somme des
-produits des coûts de chaque arc par le nombre des unités de flots qui le traverse.
+  pouvoir calculer le coût d’une solution. Ainsi, il faut trouver ici un moyen de déduire le
+  parcours des unités de flots.
+  Ensuite, trouvez une manière de calculer le coût total pour faire la somme des
+  produits des coûts de chaque arc par le nombre des unités de flots qui le traverse.
 
 ```C++
 // Fonction Ford-Fulkerson Coût
@@ -855,6 +855,7 @@ int fordFulkersonCost(grapheType &myGraph, grapheType &myCostGraph, int s, int t
   return max_flow, totalCost;
 }
 ```
+
 ```
 >>> Le cout total de ce graphe est : 1146
 ```
@@ -865,9 +866,155 @@ correspond respectivement à écrire soit une méthode exacte, soit une méthode
 approchée. Que vous fassiez le premier ou le second choix, prenez le temps de
 bien expliquer votre algorithme dans votre rapport.
 
-Dans un premier temps, nous allons expérimenter des tests sur des graphes avec moins de sommets que le dernier que l'on vient de faire ci-dessus. 
+Voici une proposition d'algorithme :
 
+On commence par initialiser deux variables, low et high, représentant les bornes inférieure et supérieure du coût du flot.
+Ensuite, on répète les étapes suivantes tant que la différence entre low et high est supérieure à une certaine tolérance :
+a. On calcule mid en prenant la moyenne de low et high.
+b. On modifie les capacités des arcs du graphe résiduel en fonction de mid.
+c. On utilise l'algorithme de Ford-Fulkerson pour trouver le flot maximal avec un coût inférieur ou égal à mid.
+d. Si le flot maximal trouvé est égal à la capacité du flot d'origine, mettez à jour high à mid, sinon, mettez à jour low à mid.
+Enfin, retournez le coût minimal trouvé.
 
-** Pour n répétitions 
-    chercher un chemin avec un coût moindre 
+> fonction trouverPlanningMoinsCoûteuxPourFlotMaximal(graphe, grapheCout, source, puits, flotMaximal)
+> low <- 0 // Initialisation de la borne inférieure
+> high <- ∞ // Initialisation de la borne supérieure
+>
+> tant que high - low > tolérance faire
+> mid <- (low + high) / 2 // Calcul du coût moyen
+>
+>        // Modification des capacités des arcs du graphe résiduel en fonction de mid
+>        grapheResiduel <- copie(graphe)
+>        pour chaque arc (i, j) dans grapheResiduel faire
+>            si grapheCout[i][j] <= mid alors
+>                capacitéArc <- capacitéOriginale // Garder la capacité originale
+>            sinon
+>                capacitéArc <- 0 // Réduire la capacité à zéro pour les arcs ayant un coût supérieur à mid
+>            fin si
+>            grapheResiduel[i][j] <- capacitéArc
+>        fin pour
+>
+>        // Utilisation de l'algorithme de Ford-Fulkerson pour trouver le flot maximal
+>        flotActuel <- algorithmeFordFulkerson(grapheResiduel, source, puits)
+>
+>        // Mise à jour des bornes en fonction du résultat de l'algorithme de Ford-Fulkerson
+>        si flotActuel == flotMaximal alors
+>            high <- mid
+>        sinon
+>            low <- mid
+>        fin si
+>
+> fin tant que
+>
+> retourner high // Retourner le coût minimal trouvé
+> fin fonction
 
+**C++**. Partie libre. Développez votre idée d’algorithme et chercher, au moins, un
+planning de coût faible. Reportez votre résultat dans votre rapport.
+
+```C++
+// Fonction pour trouver le planning le moins coûteux pour un flot maximal donné
+int findMinCostForMaxFlow(grapheType &myGraph, grapheType &myCostGraph, int s, int t, int max_flow)
+{
+int low = 0; // Initialisation de la borne inférieure
+int high = INT32_MAX; // Initialisation de la borne supérieure
+
+while (high - low > 0.001)
+{ // Tant que la différence entre low et high est significative
+int mid = (low + high) / 2; // Calcul du coût moyen
+
+    // Modifiez les capacités des arcs du graphe résiduel en fonction de mid
+    grapheType grapheResiduel = myGraph;
+    for (int i = 0; i < grapheResiduel.size(); ++i)
+    {
+      for (int j = 0; j < grapheResiduel[i].size(); ++j)
+      {
+        if (myCostGraph[i][j] <= mid)
+        {
+          grapheResiduel[i][j] = myGraph[i][j]; // Garder la capacité originale
+        }
+        else
+        {
+          grapheResiduel[i][j] = 0; // Réduire la capacité à zéro pour les arcs ayant un coût supérieur à mid
+        }
+      }
+    }
+
+    // Utilisation de l'algorithme de Ford-Fulkerson pour trouver le flot maximal
+    int current_flow = fordFulkerson(grapheResiduel, s, t);
+
+    // Mise à jour des bornes en fonction du résultat de l'algorithme de Ford-Fulkerson
+    if (current_flow == max_flow)
+    {
+      high = mid;
+    }
+    else
+    {
+      low = mid;
+    }
+
+}
+
+// Retourner le coût minimal trouvé
+return high;
+}
+
+```
+
+Une fois notre fonction imaginée et implémentée, nous allons donc essayer de trouver au moins un planning de coût faible.
+
+```C++
+  grapheType grapheUsineCost = {
+      {0, 12, 4, 7, 0},
+      {0, 0, 6, 14, 0},
+      {0, 18, 0, 21, 0},
+      {0, 25, 9, 0, 0},
+      {0, 0, 0, 0, 0},
+  };
+
+  demFrance = 15;
+  capTransFB = 8;
+  capTransBF = 8;
+  capTransBS = 3;
+  capTransSB = 3;
+  capTransFS = 12;
+  capTransSF = 12;
+
+  grapheUsine = {
+      {0, 64, 40, 28, 0},
+      {0, 0, capTransFB, capTransFS, demFrance},
+      {0, capTransBF, 0, capTransBS, demBelgique},
+      {0, capTransSF, capTransSB, 0, demSuisse},
+      {0, 0, 0, 0, 0},
+  };
+
+  if (DISPLAY)
+  {
+    std::cout << fordFulkerson(grapheUsine, 0, 4) << std::endl; // 27
+  }
+  fordFulkersonCost(grapheUsine, grapheUsineCost, 0, 4);
+
+  std::cout << findMinCostForMaxFlow(grapheUsine, grapheUsineCost, 0, 4, 27) << std::endl;
+```
+
+Malheuresement, notre fonction ne trouve pas de résultat et finit toujours par tourner à l'infini (au moins il n'y a pas d'erreur).
+Mais nous pensons que la méthode est trop coûteuse et prends trop de temps.
+
+- **Question**. Vous disposez donc d’un programme déroulant l’algorithme de Ford
+  Fulkerson sur un graphe afin de calculer le flot maximal. Supposez maintenant que
+  vous avez besoin de savoir au plus vite s’il existe un chemin entre deux points
+  sans se préoccuper des vraies capacités du graphe. Ne voulant pas implémenter de
+  nouveaux algorithmes, et n’ayant la main que sur les entrées/inputs du programme
+  (i.e., les éléments définissant le graphe), expliquez qu’est-ce que vous feriez pour
+  obtenir l’information sur l'existence d’un tel chemin.
+
+(Après des recherches sur internet) Si nous devions déterminer rapidement s'il existe un chemin entre deux points dans un graphe sans se soucier des vraies capacités du graphe et en utilisant uniquement les entrées/inputs du programme, nous pourrions utiliser une approche de recherche en profondeur (DFS - Depth-First Search) ou une recherche en largeur (BFS - Breadth-First Search) que nous avons déjà implémenté au début du TP.
+
+- **Question**. Supposez disposer du programme calculant le coût minimal du passage
+  d’une quantité de flot entre les sommets s et t qui est passée en paramètre
+  (qu’importe que la quantité soit maximale ou pas). Vous avez besoin de savoir quel
+  est le plus court chemin entre s et t. Disposant d’un graphe tel que ceux utilisés
+  dans ce sujet, que feriez-vous pour obtenir ce plus court chemin ? Aide : on peut
+  imaginer que les coûts unitaires sont alors des distances.
+
+Pour obtenir le plus court chemin entre les sommets s et t dans un graphe où les coûts unitaires représentent des distances, nous pouvons utiliser un algorithme de recherche de chemin le plus court tel que l'algorithme de Dijkstra ou l'algorithme de Bellman-Ford.
